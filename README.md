@@ -1,1 +1,2 @@
 # Scrumbags
+Ohjelmistotuotanto miniprojekti
