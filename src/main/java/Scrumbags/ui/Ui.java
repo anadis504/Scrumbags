@@ -11,7 +11,8 @@ public class Ui {
     private IO io;
     
      /**
-     * Käyttöliittymän parametriton konstruktori
+     * Käyttöliittymän parametriton konstruktori,joka luo käyttjän syötteitä
+     * lukevan olion KonsoliIO, joka toteuttaa rajapinnan IO
      */
     public Ui(){
         this.io = new KonsoliIO();
