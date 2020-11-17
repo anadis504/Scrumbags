@@ -5,10 +5,18 @@
  */
 package Scrumbags.ui;
 
-/**
- *
- * @author rasmus
- */
-public class ui {
+public class Ui {
     
+    public void run(boolean go){
+        String komento;
+        while(go){
+            System.out.println("Anna komento");
+        
+        }
+        
+    }
 }
+
+
+    
+
