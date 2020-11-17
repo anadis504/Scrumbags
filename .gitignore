@@ -4,3 +4,8 @@
 build
 *tmp
 /.nb-gradle/
+.vscode
+.classpath
+.project
+.settings/
+bin/
