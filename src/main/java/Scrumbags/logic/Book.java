@@ -12,7 +12,7 @@ public class Book {
         this.author = author;
     }
     
-    public void setISBN(String isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
     
@@ -28,7 +28,7 @@ public class Book {
         return author;
     }
 
-    public String getisbn() {
+    public String getIsbn() {
         return isbn;
     }
 
