@@ -13,5 +13,5 @@ dependencies {
 }
 
 application {
-    mainClass = 'Scrumbags.lukuvinkki.Main'
+    mainClass = 'Scrumbags.main.Main'
 }
