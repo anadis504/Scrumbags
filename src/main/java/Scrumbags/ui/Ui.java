@@ -8,13 +8,13 @@ import java.util.Scanner;
      */
 public class Ui {
     
-    private Scanner reader;
+    private IO io;
     
      /**
      * Käyttöliittymän parametriton konstruktori
      */
     public Ui(){
-        reader = new Scanner(System.in);
+        this.io = new KonsoliIO();
     }
     
     /**
@@ -25,7 +25,7 @@ public class Ui {
         while(go){
             
             System.out.println("Anna komento (q tai add)");
-            komento = reader.nextLine();
+            komento = io.nextLine();
             
             if(komento.equals("q")){
                 go = false;
