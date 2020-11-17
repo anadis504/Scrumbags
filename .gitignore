@@ -1,0 +1,6 @@
+/Lukuvinkki/.nb-gradle/
+
+.gradle
+build
+*tmp
+/.nb-gradle/
