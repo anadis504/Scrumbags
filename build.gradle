@@ -13,5 +13,5 @@ dependencies {
 }
 
 application {
-    mainClass = 'ohtu.ohtuvarasto.Main'
+    mainClass = 'Scrumbags.lukuvinkki.Main'
 }

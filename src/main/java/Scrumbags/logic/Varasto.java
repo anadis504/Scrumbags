@@ -1,4 +1,4 @@
-package ohtu.ohtuvarasto;
+package Scrumbags.logic;
 
 public class Varasto {
 

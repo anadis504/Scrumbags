@@ -1,5 +1,6 @@
-package ohtu.ohtuvarasto;
+package Scrumbags.lukuvinkki;
 
+import Scrumbags.logic.Varasto;
 import org.junit.*;
 import static org.junit.Assert.*;
 

@@ -1,4 +1,6 @@
-package ohtu.ohtuvarasto;
+package Scrumbags.lukuvinkki;
+
+import Scrumbags.logic.Varasto;
 
 public class Main {
 
