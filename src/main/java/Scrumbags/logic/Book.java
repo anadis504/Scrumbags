@@ -11,6 +11,17 @@ public class Book {
     public Book(String name, String author) {
         this.name = name;
         this.author = author;
+        this.isbn = "---";
+        this.pages = -1;
+        this.year = -1;
+    }
+    
+    public Book(String name, String author, String isbn, int pages, int year) {
+        this.name = name;
+        this.author = author;
+        this.isbn = "---";
+        this.pages = -1;
+        this.year = -1;
     }
     
     public void setIsbn(String isbn) {
@@ -47,7 +58,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Nimi: "+getName()+"\nKirjailija: "+getAuthor()+"\nISBN: "+getIsbn()+"\nSivumäärä: "+getPages();
+        return "\nNimi: "+getName()+"\nKirjailija: "+getAuthor()+"\nISBN: "+getIsbn()+"\nSivumäärä: "+getPages()+"\n";
     }
     
     
