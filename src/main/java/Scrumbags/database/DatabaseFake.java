@@ -32,4 +32,13 @@ public class DatabaseFake implements Dao {
         return true;
     }
 
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    public ArrayList<Link> getLinks() {
+        return links;
+    }
+    
+
 }
