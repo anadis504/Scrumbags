@@ -35,6 +35,11 @@ public class Book {
     public int getPages() {
         return pages;
     }
+
+    @Override
+    public String toString() {
+        return "Nimi: "+getName()+"\nKirjailija: "+getAuthor()+"\nISBN: "+getIsbn()+"\nSivumäärä: "+getPages();
+    }
     
     
 }
