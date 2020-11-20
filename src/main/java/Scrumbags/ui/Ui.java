@@ -55,8 +55,9 @@ public class Ui {
     }
 
     private void search() {
+        System.out.println("Minkä kirjailijan kirjat etsitään?");
         String author = io.nextLine();
-        this.service.getBooks(author);
+        this.service.getBooksByAuthor(author);
     }
 
     private void addBook() {
