@@ -6,6 +6,7 @@ public class Book {
     String author;
     String isbn;
     int pages;
+    int year;
     
     public Book(String name, String author) {
         this.name = name;
@@ -34,6 +35,19 @@ public class Book {
 
     public int getPages() {
         return pages;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    @Override
+    public String toString() {
+        return "Nimi: "+getName()+"\nKirjailija: "+getAuthor()+"\nISBN: "+getIsbn()+"\nSivumäärä: "+getPages();
     }
     
     

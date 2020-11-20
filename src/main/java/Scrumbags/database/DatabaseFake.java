@@ -32,4 +32,17 @@ public class DatabaseFake implements Dao {
         return true;
     }
 
+    @Override
+    public void getBooks(String author) {
+        for (Book b: this.books) {
+            if (b.getAuthor().equals(author)) {
+                System.out.println(b.toString());
+            }
+        }
+    }
+
+    @Override
+    public void getLinks(String name) {
+        
+    }
 }
