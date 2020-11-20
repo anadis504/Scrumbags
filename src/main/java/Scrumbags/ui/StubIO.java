@@ -5,10 +5,40 @@
  */
 package Scrumbags.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author toniramo
  */
-public class StubIO {
+public class StubIO implements IO {
+    private List<String> input;
+    private List<String> output;
+    private int index;
     
+    public StubIO(List<String> input) {
+        this.input = input;
+        this.output = new ArrayList<>();
+    }
+
+    @Override
+    public int nextInt() {
+        //TODO
+        return -1;
+    }
+
+    @Override
+    public String nextLine() {
+        return input.get(index++);
+    }
+
+    @Override
+    public void print(String m) {
+        output.add(m);
+    }
+    
+    public List<String> getOutput() {
+        return output;
+    }
 }

@@ -5,7 +5,7 @@ plugins {
 }
 
 repositories {
-    jcenter() 
+    jcenter()
 }
 
 run {
@@ -15,7 +15,8 @@ run {
 dependencies {
     testImplementation 'junit:junit:4.13' 
     implementation 'com.google.guava:guava:29.0-jre'
-    testCompile 'io.cucumber:cucumber-java8:6.8.1'
+    testCompile 'io.cucumber:cucumber-java:6.8.1'
+    testCompile 'io.cucumber:cucumber-junit:6.8.1'
 }
 
 application {
@@ -28,7 +29,6 @@ jar {
     }
 }
 
-
 jacocoTestReport {
     reports {
         xml.enabled true
@@ -39,4 +39,9 @@ jacocoTestReport {
             fileTree(dir: it, exclude: ['main/**','logic/Book.java'])
         }))
     }
+}
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
 }

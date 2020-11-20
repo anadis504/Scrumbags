@@ -10,26 +10,49 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import java.util.List;
+import static org.junit.Assert.*;
+
+import Scrumbags.database.*;
+import Scrumbags.ui.*;
+import Scrumbags.logic.*;
+import java.util.ArrayList;
 
 /**
  *
- * @author toniramo
+ * @author Scrumbags
  */
 public class Stepdefs {
-    List<String> lines;
+    Ui ui;
+    StubIO io;
+    Dao dao;
+    Service service;
+    List<String> input;
+    
+    @Before
+    public void setup(){
+        dao = new DatabaseFake();
+        input = new ArrayList<>();
+        service = new Service(dao);
+    }
     
     @Given("command add book is selected")
     public void commandAddBookSelected() {
-        lines.add("add book");
+        input.add("add book");
     }
     
-    @When("valid book name {string} and valid writer name {string} are entered")
+    @When("valid book name {string} and valid writer name {string} are entered and input is confirmed")
     public void validBooknameAndValidWriternameEntered(String book, String writer) {
-        lines.add(book);
-        lines.add(writer);
+        input.add(book);
+        input.add(writer);
+        input.add("y");
         
-        //run ui;
+        io = new StubIO(input);
+        ui = new Ui(io, service);
+        ui.run(true);
     }
     
     @Then("new bookmark for a book is created")
+    public void bookmarkForBookCreated() {
+        assertTrue(io.getOutput().contains("Kirja lisätty onnistuneesti."));
+    }
 }
