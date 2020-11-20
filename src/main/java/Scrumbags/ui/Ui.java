@@ -54,6 +54,7 @@ public class Ui {
     private void addBook() {
         String nimi;
         String kirjailija;
+        String ISBN;
         int sivumaara;
         int julkaisuvuosi;
 
@@ -64,6 +65,12 @@ public class Ui {
         kirjailija = io.nextLine();
         if (kirjailija.equals("q)")) {
             kirjailija = "---";
+        }
+        
+        System.out.println("Anna ISBN.");
+        ISBN = io.nextLine();
+        if (ISBN.equals("q)")) {
+            ISBN = "---";
         }
 
         System.out.println("Anna kirjain sivumäärä");
@@ -91,6 +98,7 @@ public class Ui {
         System.out.println("LISÄTÄÄN KIRJA: \n"
                 + "NIMI: " + nimi + "\n"
                 + "KIRJAILIJA: " + kirjailija + "\n"
+                + "ISBN: " + ISBN + "\n"
                 + "SIVUMÄÄRÄ: " + sivumaara + "\n"
                 + "JULKAISUVUOSI: " + julkaisuvuosi + "\n"
                 + "ONKO OK? [y/n]");
