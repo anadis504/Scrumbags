@@ -65,6 +65,16 @@ public class Database implements Dao {
             return false;
         }
         
-        return true;    }
-    
+        return true;
+    }
+
+    @Override
+    public void getBooksByAuthor(String author) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void getLinksByName(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

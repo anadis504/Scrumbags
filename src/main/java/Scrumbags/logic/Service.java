@@ -14,10 +14,17 @@ public class Service {
         Book book = new Book(name, author);
         return this.database.addBook(book);
     }
+    public boolean addBook(String name, String author, String isbn, int pages, int  year) {
+        Book book = new Book(name, author, isbn, pages, year);
+        return this.database.addBook(book);
+    }
     
     public boolean addLink(String name, String adress) {
         Link link = new Link(name, adress);
         return this.database.addLink(link);
     }
-    
+
+    public void getBooksByAuthor(String author) {
+        this.database.getBooksByAuthor(author);
+    }
 }
