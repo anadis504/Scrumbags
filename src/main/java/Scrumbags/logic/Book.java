@@ -82,8 +82,8 @@ public class Book {
 
     @Override
     public String toString() {
-        return "\nNimi: "+getName()+"\nKirjailija: "+getAuthor()+"\nISBN: "+getIsbn()+"\nSivumäärä: "+getPages()+"\n";
+        return "\nNimi: "+getName()+"\nKirjailija: "+getAuthor()
+                +"\nISBN: "+getIsbn()+"\nSivumäärä: "+getPages()
+                +"Julkaisuvuosi: " + getYear();
     }
-    
-    
 }
