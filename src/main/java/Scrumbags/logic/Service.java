@@ -24,8 +24,7 @@ public class Service {
         return this.database.addLink(link);
     }
 
-    public void getBooks(String author) {
-        this.database.getBooks(author);
+    public void getBooksByAuthor(String author) {
+        this.database.getBooksByAuthor(author);
     }
-    
 }

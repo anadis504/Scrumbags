@@ -62,8 +62,9 @@ public class Ui {
     }
 
     private void search() {
+        System.out.println("Minkä kirjailijan kirjat etsitään?");
         String author = io.nextLine();
-        this.service.getBooks(author);
+        this.service.getBooksByAuthor(author);
     }
 
     private void addBook() {
@@ -117,29 +118,30 @@ public class Ui {
                 + "SIVUMÄÄRÄ: " + sivumaara + "\n"
                 + "JULKAISUVUOSI: " + julkaisuvuosi + "\n"
                 + "ONKO OK? [y/n]");
-                
-        if (service.addBook(nimi, kirjailija)) {
-            io.print("Kirja lisätty onnistuneesti.");
-        } else {
+         if (yesNo()) {
+            if(service.addBook(nimi, kirjailija, ISBN, sivumaara, julkaisuvuosi)) {
+                io.print("Kirja lisätty onnistuneesti.");
+            } else {
             io.print("Kirjaa ei onnistuttu lisäämään.");
-        }
-
+            }
+         }
     }
 
     private void addLink() {
-        String nimi; String URL;
+        String nimi;
+        String URL;
         io.print("Anna Linkin nimi.");
         nimi = io.nextLine();
 
         io.print("Anna URL.");
         URL = io.nextLine();
-        
         io.print("LISÄTÄÄN URL: \n"
                 + "NIMI: " + nimi + "\n"
                 + "URL: " + URL + "\n"
                 + "ONKO OK? [y/n]");
-        
-        service.addLink(nimi, URL);
+        if (yesNo()) {
+            service.addLink(nimi, URL);
+        }
     }
 
     private boolean checkIfNumber(String sana) {
@@ -160,5 +162,16 @@ public class Ui {
             return true;
         }
         return false;
+    }
+
+    private boolean yesNo() {
+        while (true) {
+            komento = io.nextLine();
+            if (komento.equals("y")) {
+                return true;
+            } else if (komento.equals("n")) {
+                return false;
+            }
+        }
     }
 }
