@@ -22,3 +22,15 @@ Lukuvinkkikirjasto<br>
 ```
 java -jar Scrumbags.jar
 ```
+
+* Jacoco-testikattavuusraportti luodaan projektin juurikansiossa suorittamalla komento. Huom. suositeltavaa on suorittaa prokjektille ensin komennot ./gradlew clean sekä ./gradlew build
+
+```
+./gradlew test jacocotestReport
+```
+
+* Tämän jälkeen jacoco-testikattavuusraporttia voi tarkastella juurikansiossa esimerkiksi komennolla
+
+```
+firefox build/reports/jacoco/test/html/index.html
+```
