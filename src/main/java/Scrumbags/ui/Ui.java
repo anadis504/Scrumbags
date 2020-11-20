@@ -140,7 +140,11 @@ public class Ui {
                 + "URL: " + URL + "\n"
                 + "ONKO OK? [y/n]");
         if (yesNo()) {
-            service.addLink(nimi, URL);
+            if (service.addLink(nimi, URL)) {
+                io.print("Linkki lisätty onnistuneesti.");
+            } else {
+                io.print("Linkkiä ei onnistuttu lisäämään.");
+            }
         }
     }
 

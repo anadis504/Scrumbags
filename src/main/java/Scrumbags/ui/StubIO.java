@@ -30,7 +30,10 @@ public class StubIO implements IO {
 
     @Override
     public String nextLine() {
-        return input.get(index++);
+        if (index < input.size()) {
+            return input.get(index++);
+        }
+        return "";
     }
 
     @Override

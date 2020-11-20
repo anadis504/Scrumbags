@@ -40,11 +40,15 @@ public class Stepdefs {
         input.add("add book");
     }
     
-    @When("valid book name {string} and valid writer name {string} are entered and input is confirmed")
-    public void validBooknameAndValidWriternameEntered(String book, String writer) {
+    @When("valid book name {string}, writer name {string}. ISBN {string}, number of pages {string} and publication year {string} are entered and input is confirmed")
+    public void validBookAttributesEnteredAndConfirmed(String book, String writer, String isbn, String pages, String year) {
         input.add(book);
         input.add(writer);
+        input.add(isbn);
+        input.add(pages);
+        input.add(year);
         input.add("y");
+        input.add("q");
         
         io = new StubIO(input);
         ui = new Ui(io, service);
@@ -55,4 +59,29 @@ public class Stepdefs {
     public void bookmarkForBookCreated() {
         assertTrue(io.getOutput().contains("Kirja lisätty onnistuneesti."));
     }
+    
+    @Given("command add link is selected")
+    public void commandAddLinkSelected() {
+        input.add("add link");
+    }
+    
+    @When("valid link name {string} and url {string} are entered and input is confirmed")
+    public void validLinkAttributesEnteredAndInputConfirmed(String name, String url) {
+        input.add(name);
+        input.add(url);
+        input.add("y");
+        input.add("q");
+        
+        io = new StubIO(input);
+        ui = new Ui(io, service);
+        ui.run(true);
+    }
+    
+    @Then("new bookmark for a link is created")
+    public void bookmarkForLinkCreated() {
+        assertTrue(io.getOutput().contains("Linkki lisätty onnistuneesti."));
+    }
+    
+    
+    
 }
