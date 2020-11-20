@@ -111,7 +111,7 @@ public class Ui {
                 + "JULKAISUVUOSI: " + julkaisuvuosi + "\n"
                 + "ONKO OK? [y/n]");
                 
-        service.addBook(nimi, kirjailija);
+        service.addBook(nimi, kirjailija, ISBN, sivumaara, julkaisuvuosi);
 
     }
 
