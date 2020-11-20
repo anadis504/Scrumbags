@@ -13,13 +13,12 @@ public class Ui {
     private IO io;
     private Service service;
     private String[] str;
-    private DatabaseFake database = new DatabaseFake();
+    // private DatabaseFake database = new DatabaseFake();
+    private Database database;
     
-     /**
-     * Käyttöliittymän parametriton konstruktori,joka luo käyttjän syötteitä
-     * lukevan olion KonsoliIO, joka toteuttaa rajapinnan IO
-     */
-    public Ui(){
+    public Ui() throws Exception {
+        this.database = new Database("jdbc:sqlite:library.db");
+        
         this.io = new KonsoliIO();
         this.service = new Service(database);
     }

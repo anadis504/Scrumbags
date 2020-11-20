@@ -5,7 +5,8 @@ plugins {
 }
 
 repositories {
-    jcenter() 
+    jcenter()
+    mavenCentral()
 }
 
 run {
@@ -15,6 +16,7 @@ run {
 dependencies {
     testImplementation 'junit:junit:4.13' 
     implementation 'com.google.guava:guava:29.0-jre' 
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.32.3.2'
 }
 
 application {
@@ -26,7 +28,6 @@ jar {
         attributes 'Main-Class': 'Scrumbags.main.Main'
     }
 }
-
 
 jacocoTestReport {
     reports {
