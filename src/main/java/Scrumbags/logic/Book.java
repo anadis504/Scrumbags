@@ -16,6 +16,14 @@ public class Book {
         this.year = -1;
     }
     
+    public Book(String name, String author, String isbn, int pages, int year) {
+        this.name = name;
+        this.author = author;
+        this.isbn = "---";
+        this.pages = -1;
+        this.year = -1;
+    }
+    
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
