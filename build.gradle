@@ -21,6 +21,13 @@ application {
     mainClass = 'Scrumbags.main.Main'
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'Scrumbags.main.Main'
+    }
+}
+
+
 jacocoTestReport {
     reports {
         xml.enabled true
