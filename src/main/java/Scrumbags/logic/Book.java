@@ -6,10 +6,22 @@ public class Book {
     String author;
     String isbn;
     int pages;
+    int year;
     
     public Book(String name, String author) {
         this.name = name;
         this.author = author;
+        this.isbn = "---";
+        this.pages = -1;
+        this.year = -1;
+    }
+    
+    public Book(String name, String author, String isbn, int pages, int year) {
+        this.name = name;
+        this.author = author;
+        this.isbn = "---";
+        this.pages = -1;
+        this.year = -1;
     }
     
     public void setIsbn(String isbn) {
@@ -34,6 +46,14 @@ public class Book {
 
     public int getPages() {
         return pages;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     @Override
