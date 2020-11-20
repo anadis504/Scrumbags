@@ -32,7 +32,6 @@ public class DatabaseFake implements Dao {
         return true;
     }
 
-<<<<<<< HEAD
     @Override
     public void getBooks(String author) {
         for (Book b: this.books) {
@@ -46,15 +45,4 @@ public class DatabaseFake implements Dao {
     public void getLinks(String name) {
         
     }
-=======
-    public ArrayList<Book> getBooks() {
-        return books;
-    }
-
-    public ArrayList<Link> getLinks() {
-        return links;
-    }
-    
->>>>>>> f08d58fb9839a33869bf7ee5223a24107d9cb696
-
 }
