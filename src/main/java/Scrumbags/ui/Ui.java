@@ -35,7 +35,8 @@ public class Ui {
             System.out.println("\nkomennot:\n"
                     + "q\n"
                     + "add book\n"
-                    + "add link\n\n"
+                    + "add link\n"
+                    + "search\n\n"
                     + "Anna komento:");
             komento = io.nextLine();
             /**
@@ -47,8 +48,15 @@ public class Ui {
                 addBook();
             } else if (komento.equals("add link")) {
                 addLink();
+            } else if (komento.equals("search")) {
+                search();
             }
         }
+    }
+
+    private void search() {
+        String author = io.nextLine();
+        this.service.getBooks(author);
     }
 
     private void addBook() {
@@ -103,7 +111,7 @@ public class Ui {
                 + "JULKAISUVUOSI: " + julkaisuvuosi + "\n"
                 + "ONKO OK? [y/n]");
                 
-        service.addBook(nimi, kirjailija);
+        service.addBook(nimi, kirjailija, ISBN, sivumaara, julkaisuvuosi);
 
     }
 

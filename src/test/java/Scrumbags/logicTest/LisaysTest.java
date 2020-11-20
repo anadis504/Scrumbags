@@ -28,5 +28,4 @@ public class LisaysTest {
         this.service.addBook("Aapinen", "Tuntematon");
         assertTrue(this.service.addBook("Aapinen", "Tuntematon"));
     }
-    
 }
