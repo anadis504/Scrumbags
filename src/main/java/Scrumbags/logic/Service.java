@@ -27,5 +27,4 @@ public class Service {
     public void getBooks(String author) {
         this.database.getBooks(author);
     }
-    
 }

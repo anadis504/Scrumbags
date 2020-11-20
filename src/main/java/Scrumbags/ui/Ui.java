@@ -74,7 +74,7 @@ public class Ui {
         if (kirjailija.equals("q")) {
             kirjailija = "---";
         }
-        
+
         System.out.println("Anna ISBN.");
         ISBN = io.nextLine();
         if (ISBN.equals("q")) {
@@ -110,25 +110,27 @@ public class Ui {
                 + "SIVUMÄÄRÄ: " + sivumaara + "\n"
                 + "JULKAISUVUOSI: " + julkaisuvuosi + "\n"
                 + "ONKO OK? [y/n]");
-                
-        service.addBook(nimi, kirjailija, ISBN, sivumaara, julkaisuvuosi);
-
+        if (yesNo()) {
+            service.addBook(nimi, kirjailija, ISBN, sivumaara, julkaisuvuosi);
+        }
     }
 
     private void addLink() {
-        String nimi; String URL;
+        String nimi;
+        String URL;
         System.out.println("Anna Linkin nimi.");
         nimi = io.nextLine();
 
         System.out.println("Anna URL.");
         URL = io.nextLine();
-        
+
         System.out.println("LISÄTÄÄN URL: \n"
                 + "NIMI: " + nimi + "\n"
                 + "URL: " + URL + "\n"
                 + "ONKO OK? [y/n]");
-        
-        service.addLink(nimi, URL);
+        if (yesNo()) {
+            service.addLink(nimi, URL);
+        }
     }
 
     private boolean checkIfNumber(String sana) {
@@ -149,5 +151,16 @@ public class Ui {
             return true;
         }
         return false;
+    }
+
+    private boolean yesNo() {
+        while (true) {
+            komento = io.nextLine();
+            if (komento.equals("y")) {
+                return true;
+            } else if (komento.equals("n")) {
+                return false;
+            }
+        }
     }
 }
