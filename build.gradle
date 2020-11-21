@@ -37,7 +37,7 @@ jacocoTestReport {
     } 
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['main/**','logic/Book.java'])
+            fileTree(dir: it, exclude: ['**/main/**','**/logic/Book.class','**/logic/Link.class','**/database/Database.class'])
         }))
     }
 }
