@@ -1,6 +1,7 @@
 package Scrumbags.logic;
 
 import Scrumbags.database.Dao;
+import java.util.ArrayList;
 
 public class Service {
     private Dao database;
@@ -24,7 +25,7 @@ public class Service {
         return this.database.addLink(link);
     }
 
-    public void getBooksByAuthor(String author) {
-        this.database.getBooksByAuthor(author);
+    public ArrayList<Book> getBooksByAuthor(String author) {
+        return this.database.getBooksByAuthor(author);
     }
 }

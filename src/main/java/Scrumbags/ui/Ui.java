@@ -4,6 +4,7 @@ package Scrumbags.ui;
 import java.util.Scanner;
 import Scrumbags.database.*;
 import Scrumbags.logic.*;
+import java.util.ArrayList;
 
 /**
  * Lukuvinkkipalvelun tekstipohjainen käyttöliittymä
@@ -14,7 +15,7 @@ public class Ui {
     private Service service;
     private String[] str;
     // private DatabaseFake database = new DatabaseFake();
-    private Database database;
+    private Dao database;
     private String komento;
 
     /**
@@ -59,7 +60,14 @@ public class Ui {
     private void search() {
         System.out.println("Minkä kirjailijan kirjat etsitään?");
         String author = io.nextLine();
-        this.service.getBooksByAuthor(author);
+        ArrayList<Book> booklist = this.service.getBooksByAuthor(author);
+        if (booklist != null) {
+            for (Book b : booklist) {
+                System.out.println(b);
+            }
+        } else {
+            System.out.println("Ei tuloksia.");
+        }
     }
 
     private void addBook() {

@@ -9,7 +9,9 @@ import Scrumbags.logic.Book;
 import Scrumbags.logic.Link;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -69,12 +71,31 @@ public class Database implements Dao {
     }
 
     @Override
-    public void getBooksByAuthor(String author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Book> getBooksByAuthor(String author) {
+        ArrayList<Book> booklist = new ArrayList<>();
+        
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Books WHERE author=?");
+            stmt.setString(1, author);
+            ResultSet res = stmt.executeQuery();
+            // Luodaan Book-olio
+            while (res.next()) {
+                System.out.println("loppissa");
+                Book book = new Book(res.getString("name"), res.getString("author"), res.getString("isbn"), res.getInt("pages"), res.getInt("year"));
+                booklist.add(book);
+            }
+            stmt.close();
+            if (booklist.isEmpty()) {
+                return null;
+            }
+            return booklist;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
 
     @Override
-    public void getLinksByName(String name) {
+    public ArrayList<Link> getLinksByName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
