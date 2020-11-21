@@ -13,12 +13,6 @@ public class DatabaseFake implements Dao {
         this.books = new ArrayList<>();
         this.links = new ArrayList<>();
     }
-
-    public boolean format() {
-        this.books.clear();
-        this.links.clear();
-        return true;
-    }
    
     @Override
     public boolean addBook(Book book) {
