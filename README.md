@@ -10,17 +10,17 @@ Lukuvinkkikirjasto<br>
 ## Käyttöohjeet
 
 * Lataa projekti koneellesi ja mene kansioon Scrumbags
-* Luo jar-tiedosto komennolla
+* Luo shadow jar-tiedosto komennolla
 
 ```
-./gradlew jar
+./gradlew shadowJar
 ```
 
-* Jar-tiedosto *Scrumbags.jar* luodaan kansioon Scrumbags/build/libs/. Jos et löydä sitä niin suorita komento *tree*.
+* Jar-tiedosto *Scrumbags-all.jar* luodaan kansioon Scrumbags/build/libs/. Jos et löydä sitä niin suorita komento *tree*.
 * Mene kansioon jossa tiedosto sijaitsee ja aja se komennolla
 
 ```
-java -jar Scrumbags.jar
+java -jar Scrumbags-all.jar
 ```
 
 * Jacoco-testikattavuusraportti luodaan projektin juurikansiossa suorittamalla komento. Huom. suositeltavaa on suorittaa prokjektille ensin komennot ./gradlew clean sekä ./gradlew build
