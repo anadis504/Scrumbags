@@ -80,7 +80,6 @@ public class Database implements Dao {
             ResultSet res = stmt.executeQuery();
             // Luodaan Book-olio
             while (res.next()) {
-                System.out.println("loppissa");
                 Book book = new Book(res.getString("name"), res.getString("author"), res.getString("isbn"), res.getInt("pages"), res.getInt("year"));
                 booklist.add(book);
             }
