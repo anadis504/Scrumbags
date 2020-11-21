@@ -26,8 +26,12 @@ public class LisaysTest {
     
     @Test
     public void addingBookReturnsTrue() {
-        this.service.addBook("Aapinen", "Tuntematon");
         assertTrue(this.service.addBook("Aapinen", "Tuntematon"));
+    }
+    
+    @Test
+    public void addingLinkReturnsTrue() {
+        assertTrue(this.service.addBook("Google", "http://www.google.com"));
     }
     
     @Test
