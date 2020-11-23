@@ -27,7 +27,7 @@ public class Ui {
         this.service = new Service(database);
         this.komento = "";
     }
-    
+
     //Riippuvuuksien injektointia varten, jotta testaus onnistuu
     public Ui(IO io, Service service) {
         this.io = io;
@@ -91,7 +91,7 @@ public class Ui {
         if (kirjailija.equals("q")) {
             kirjailija = "---";
         }
-        
+
         io.print("Anna ISBN.");
         ISBN = io.nextLine();
         if (ISBN.equals("q")) {
@@ -127,13 +127,13 @@ public class Ui {
                 + "SIVUMÄÄRÄ: " + sivumaara + "\n"
                 + "JULKAISUVUOSI: " + julkaisuvuosi + "\n"
                 + "ONKO OK? [y/n]");
-         if (yesNo()) {
-            if(service.addBook(nimi, kirjailija, ISBN, sivumaara, julkaisuvuosi)) {
+        if (yesNo()) {
+            if (service.addBook(nimi, kirjailija, ISBN, sivumaara, julkaisuvuosi)) {
                 io.print("Kirja lisätty onnistuneesti.");
             } else {
-            io.print("Kirjaa ei onnistuttu lisäämään.");
+                io.print("Kirjaa ei onnistuttu lisäämään.");
             }
-         }
+        }
     }
 
     private void addLink() {
