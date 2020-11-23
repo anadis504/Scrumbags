@@ -38,7 +38,7 @@ public class Book {
      * @param author = kirjan kirjailija
      * @param isbn = kirjan isbn-tunnus. (null-arvo = "---")
      * @param pages = kirjan sivunumero. (null-arvo = -1)
-     * @param isbn = kirjan julkaisuvuosi. (null-arvo = -1)
+     * @param year
      */
     public Book(String name, String author, String isbn, int pages, int year) {
         this.name = name;
@@ -50,6 +50,10 @@ public class Book {
     
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+    
+    public void setYear(int year) {
+        this.year = year;
     }
     
     public void setPages(int pages) {
@@ -68,16 +72,12 @@ public class Book {
         return isbn;
     }
 
-    public int getPages() {
-        return pages;
-    }
-
     public int getYear() {
         return year;
     }
-
-    public void setYear(int year) {
-        this.year = year;
+    
+    public int getPages() {
+        return pages;
     }
 
     @Override
