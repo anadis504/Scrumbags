@@ -36,3 +36,11 @@ java -jar Scrumbags-all.jar
 ```
 firefox build/reports/jacoco/test/html/index.html
 ```
+
+## Definition of Done
+
+* User story on määritelty ja sen merkitys analysoitu tarkasti
+* Toiminnallisuus on toteutettu kooditasolla
+* Toiminnallisuus on testattu kaikilla tasoilla automaattisesti ja kattavasti, minkä lisäksi on suoritettu tarvittava määrä tutkivaa testausta
+* Toiminnallisuus on integroitu onnistuneesti osaksi muuta sovellusta
+* Sovelluksen toiminta on dokumentoitu
