@@ -14,8 +14,7 @@ public class Ui {
     private IO io;
     private Service service;
     private String[] str;
-    // private DatabaseFake database = new DatabaseFake();
-    private Dao database;
+    private Database database;
     private String komento;
 
     /**
@@ -28,14 +27,21 @@ public class Ui {
         this.service = new Service(database);
         this.komento = "";
     }
+    
+    //Riippuvuuksien injektointia varten, jotta testaus onnistuu
+    public Ui(IO io, Service service) {
+        this.io = io;
+        this.service = service;
+        this.komento = "";
+    }
 
     /**
      * Käyttöliittymän käynnistys
      */
     public void run(boolean go) {
-        System.out.println("Tervetuloa!");
+        io.print("Tervetuloa!");
         while (go) {
-            System.out.println("\nkomennot:\n"
+            io.print("\nkomennot:\n"
                     + "q\n"
                     + "add book\n"
                     + "add link\n"
@@ -77,22 +83,22 @@ public class Ui {
         int sivumaara;
         int julkaisuvuosi;
 
-        System.out.println("Anna kirjan nimi.");
+        io.print("Anna kirjan nimi.");
         nimi = io.nextLine();
 
-        System.out.println("Anna kirjailijan nimi.");
+        io.print("Anna kirjailijan nimi.");
         kirjailija = io.nextLine();
         if (kirjailija.equals("q")) {
             kirjailija = "---";
         }
-
-        System.out.println("Anna ISBN.");
+        
+        io.print("Anna ISBN.");
         ISBN = io.nextLine();
         if (ISBN.equals("q")) {
             ISBN = "---";
         }
 
-        System.out.println("Anna kirjain sivumäärä");
+        io.print("Anna kirjain sivumäärä");
         komento = io.nextLine();
         while (!checkIfNumber(komento) && !checkIfQ(komento)) {
             komento = io.nextLine();
@@ -103,7 +109,7 @@ public class Ui {
             sivumaara = Integer.parseInt(komento);
         }
 
-        System.out.println("Anna kirjain julkaisuvuosi");
+        io.print("Anna kirjain julkaisuvuosi");
         komento = io.nextLine();
         while (!checkIfNumber(komento) && !checkIfQ(komento)) {
             komento = io.nextLine();
@@ -114,33 +120,40 @@ public class Ui {
             julkaisuvuosi = Integer.parseInt(komento);
         }
 
-        System.out.println("LISÄTÄÄN KIRJA: \n"
+        io.print("LISÄTÄÄN KIRJA: \n"
                 + "NIMI: " + nimi + "\n"
                 + "KIRJAILIJA: " + kirjailija + "\n"
                 + "ISBN: " + ISBN + "\n"
                 + "SIVUMÄÄRÄ: " + sivumaara + "\n"
                 + "JULKAISUVUOSI: " + julkaisuvuosi + "\n"
                 + "ONKO OK? [y/n]");
-        if (yesNo()) {
-            service.addBook(nimi, kirjailija, ISBN, sivumaara, julkaisuvuosi);
-        }
+         if (yesNo()) {
+            if(service.addBook(nimi, kirjailija, ISBN, sivumaara, julkaisuvuosi)) {
+                io.print("Kirja lisätty onnistuneesti.");
+            } else {
+            io.print("Kirjaa ei onnistuttu lisäämään.");
+            }
+         }
     }
 
     private void addLink() {
         String nimi;
         String URL;
-        System.out.println("Anna Linkin nimi.");
+        io.print("Anna Linkin nimi.");
         nimi = io.nextLine();
 
-        System.out.println("Anna URL.");
+        io.print("Anna URL.");
         URL = io.nextLine();
-
-        System.out.println("LISÄTÄÄN URL: \n"
+        io.print("LISÄTÄÄN URL: \n"
                 + "NIMI: " + nimi + "\n"
                 + "URL: " + URL + "\n"
                 + "ONKO OK? [y/n]");
         if (yesNo()) {
-            service.addLink(nimi, URL);
+            if (service.addLink(nimi, URL)) {
+                io.print("Linkki lisätty onnistuneesti.");
+            } else {
+                io.print("Linkkiä ei onnistuttu lisäämään.");
+            }
         }
     }
 
@@ -151,7 +164,7 @@ public class Ui {
         try {
             int d = Integer.parseInt(sana);
         } catch (NumberFormatException nfe) {
-            System.out.println("Anna numero tai kirjoita \"q\"");
+            io.print("Anna numero tai kirjoita \"q\"");
             return false;
         }
         return true;
