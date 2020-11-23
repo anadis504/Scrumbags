@@ -7,6 +7,8 @@ Lukuvinkkikirjasto<br>
   
 [![codecov](https://codecov.io/gh/Latelaukki/Scrumbags/branch/main/graph/badge.svg)](https://codecov.io/gh/Latelaukki/Scrumbags)
 
+![Java CI with Gradle](https://github.com/Latelaukki/Scrumbags/workflows/Java%20CI%20with%20Gradle/badge.svg)
+
 ## Käyttöohjeet
 
 * Lataa projekti koneellesi ja mene kansioon Scrumbags
