@@ -102,6 +102,11 @@ ONKO OK? [y/n]
 
 Jos syötteet ovat oikein, syötä `y` ja paina `Enter`. Muussa tapauksessa syötä `n` ja paina `Enter`.
 
+Jos kirjan lisääminen tapahtui onnistuneesti, käyttöliittymä ilmoittaa seuraavasti:
+
+```
+Kirja lisätty onnistuneesti.
+```
 #### Linkin lisääminen
 Syötä komento `add book`:
 
@@ -132,7 +137,13 @@ URL: https://ohjelmistotuotanto-hy.github.io/
 ONKO OK? [y/n]
 ```
 
-Jos syötteet ovat oikein, syötä `y` ja paina `Enter`. Muussa tapauksessa syötä `n` ja paina `Enter`.
+Jos syötteet ovat oikein, syötä `y` ja paina `Enter`. Muussa tapauksessa syötä `n` ja paina `Enter`. 
+
+Jos linkin lisääminen tapahtui onnistuneesti, käyttöliittymä ilmoittaa seuraavasti:
+
+```
+Linkki lisätty onnistuneesti.
+```
 
 #### Sovelluksen sulkeminen
 Syötä komento `q`:
