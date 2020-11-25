@@ -6,16 +6,18 @@
 package Scrumbags;
 
 import io.cucumber.java.Before;
+import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import java.util.List;
 import static org.junit.Assert.*;
+import java.io.File;
+import java.util.ArrayList;
 
 import Scrumbags.database.*;
 import Scrumbags.ui.*;
 import Scrumbags.logic.*;
-import java.util.ArrayList;
 
 /**
  *
@@ -27,13 +29,25 @@ public class Stepdefs {
     Dao dao;
     Service service;
     List<String> input;
+    String testDatabaseName = "test.db";
     
     @Before
-    public void setup(){
-        dao = new DatabaseFake();
+    public void setup() throws ClassNotFoundException{
+        dao = new Database("jdbc:sqlite:"+testDatabaseName);
         input = new ArrayList<>();
         service = new Service(dao);
     }
+    
+    @After
+    public void tearDown() {
+        try {
+            File db = new File("test.db");
+            db.delete();
+        } catch (Exception e) {
+            System.out.println("Exception: " + e);
+        }
+    }    
+    
     
     @Given("command add book is selected")
     public void commandAddBookSelected() {
@@ -81,7 +95,5 @@ public class Stepdefs {
     public void bookmarkForLinkCreated() {
         assertTrue(io.getOutput().contains("Linkki lisätty onnistuneesti."));
     }
-    
-    
     
 }
