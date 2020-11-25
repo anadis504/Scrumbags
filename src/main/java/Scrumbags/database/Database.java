@@ -122,7 +122,6 @@ public class Database implements Dao {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Books WHERE name=?");
             stmt.setString(1, name);
             ResultSet res = stmt.executeQuery();
-            // Luodaan Book-olio
             while (res.next()) {
                 Book book = new Book(res.getString("name"), res.getString("author"), res.getString("isbn"), res.getInt("pages"), res.getInt("year"));
                 booklist.add(book);
@@ -140,8 +139,11 @@ public class Database implements Dao {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Books WHERE isbn=?");
             stmt.setString(1, isbn);
             ResultSet res = stmt.executeQuery();
-            // Luodaan Book-olio
+            // Luodaan Book-olio mutta ei silloin jos isbn vastaa tyhjää
             while (res.next()) {
+                if (res.getString("isbn").equals("---") || res.getString("isbn").equals("")) {
+                    continue;
+                }
                 Book book = new Book(res.getString("name"), res.getString("author"), res.getString("isbn"), res.getInt("pages"), res.getInt("year"));
                 return book;
             }
