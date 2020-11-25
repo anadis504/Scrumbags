@@ -32,7 +32,6 @@ public class DatabaseFake implements Dao {
         for (Book b: this.books) {
             if (b.getAuthor().equals(author)) {
                 booklist.add(b);
-                // System.out.println(b.toString());
             }
         }
         return booklist;
@@ -41,6 +40,32 @@ public class DatabaseFake implements Dao {
     @Override
     public ArrayList<Link> getLinksByName(String name) {
         ArrayList<Link>  linklist = new ArrayList<>();
+        for (Link l: this.links) {
+            if (l.getName().equals(name)) {
+                linklist.add(l);
+            }
+        }
         return linklist;
+    }
+
+    @Override
+    public ArrayList<Book> getBooksByName(String name) {
+        ArrayList<Book> booklist = new ArrayList<>();
+        for (Book b: this.books) {
+            if (b.getName().equals(name)) {
+                booklist.add(b);
+            }
+        }
+        return booklist;
+    }
+
+    @Override
+    public Book getBookByIsbn(String isbn) {
+        for (Book b: this.books) {
+            if (b.getIsbn().equals(isbn)) {
+                return b;
+            }
+        }
+        return null;
     }
 }

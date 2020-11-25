@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Scrumbags.database;
 
 import Scrumbags.logic.Book;
@@ -12,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+
 
 /**
  *
@@ -95,6 +93,62 @@ public class Database implements Dao {
 
     @Override
     public ArrayList<Link> getLinksByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Link> linklist = new ArrayList<>();
+
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Links WHERE name=?");
+            stmt.setString(1, name);
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()) {
+                Link link = new Link(res.getString("name"), res.getString("address"));
+                linklist.add(link);
+            }
+            stmt.close();
+            if (linklist.isEmpty()) {
+                return null;
+            }
+            return linklist;
+        } catch (SQLException e) {
+            return null;
+        }
+
+    }
+
+    @Override
+    public ArrayList<Book>  getBooksByName(String name) {
+        ArrayList<Book> booklist = new ArrayList<>();
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Books WHERE name=?");
+            stmt.setString(1, name);
+            ResultSet res = stmt.executeQuery();
+            // Luodaan Book-olio
+            while (res.next()) {
+                Book book = new Book(res.getString("name"), res.getString("author"), res.getString("isbn"), res.getInt("pages"), res.getInt("year"));
+                booklist.add(book);
+            }
+            stmt.close();
+            return booklist;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    @Override
+    public Book getBookByIsbn(String isbn) {
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Books WHERE isbn=?");
+            stmt.setString(1, isbn);
+            ResultSet res = stmt.executeQuery();
+            // Luodaan Book-olio
+            while (res.next()) {
+                Book book = new Book(res.getString("name"), res.getString("author"), res.getString("isbn"), res.getInt("pages"), res.getInt("year"));
+                return book;
+            }
+            stmt.close();
+            return null;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
 }

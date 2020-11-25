@@ -42,22 +42,22 @@ public class Ui {
         io.print("Tervetuloa!");
         while (go) {
             io.print("\nkomennot:\n"
-                    + "q\n"
-                    + "add book\n"
-                    + "add link\n"
-                    + "search\n\n"
-                    + "Anna komento:");
+                    + "q) Poistu ohjelmasta\n"
+                    + "1) Lisää kirja\n"
+                    + "2) Lisää linkki\n"
+                    + "3) Hae\n\n"
+                    + "Anna komennon numero:");
             komento = io.nextLine();
             /**
              * lukuvinkkien lisääminen käyttäjän syötteestä
              */
             if (komento.equals("q")) {
                 go = false;
-            } else if (komento.equals("add book")) {
+            } else if (komento.equals("1")) {
                 addBook();
-            } else if (komento.equals("add link")) {
+            } else if (komento.equals("2")) {
                 addLink();
-            } else if (komento.equals("search")) {
+            } else if (komento.equals("3")) {
                 search();
             }
         }
