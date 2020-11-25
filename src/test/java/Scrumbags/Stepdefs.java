@@ -37,7 +37,7 @@ public class Stepdefs {
     
     @Given("command add book is selected")
     public void commandAddBookSelected() {
-        input.add("add book");
+        input.add("1");
     }
     
     @When("valid book name {string}, writer name {string}. ISBN {string}, number of pages {string} and publication year {string} are entered and input is confirmed")
@@ -62,7 +62,7 @@ public class Stepdefs {
     
     @Given("command add link is selected")
     public void commandAddLinkSelected() {
-        input.add("add link");
+        input.add("2");
     }
     
     @When("valid link name {string} and url {string} are entered and input is confirmed")
