@@ -15,9 +15,14 @@ public class Service {
     // Ei hyväksytä duplaria jos saman niminen isbn:llä varustettu löytyy
     public boolean addBook(String name, String author) {
         Book book = new Book(name, author);
-        if (bookNameExists(name) && !getBookByName(name).getIsbn().equals("---")) return false;
+        if (bookNameExists(name)) {
+            for (Book b: getBooksByName(name)) {
+                if (!b.getIsbn().equals("---")) return false;
+            }
+        }
         return this.database.addBook(book);
     }
+    
     public boolean addBook(String name, String author, String isbn, int pages, int  year) {
         Book book = new Book(name, author, isbn, pages, year);
         if (bookIsbnExists(isbn)) return false;
@@ -33,15 +38,15 @@ public class Service {
         return this.database.getBooksByAuthor(author);
     }
     
-    public Book getBookByName(String name) {
-        return database.getBookByName(name);
+    public ArrayList<Book> getBooksByName(String name) {
+        return database.getBooksByName(name);
     }
     
     public boolean bookIsbnExists(String isbn) {
         return database.getBookByIsbn(isbn) != null;
     }
     
-    public boolean bookNameExists(String isbn) {
-        return database.getBookByIsbn(isbn) != null;
+    public boolean bookNameExists(String name) {
+        return database.getBooksByName(name) != null;
     }
 }

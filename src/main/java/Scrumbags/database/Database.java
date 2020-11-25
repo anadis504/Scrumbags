@@ -116,7 +116,8 @@ public class Database implements Dao {
     }
 
     @Override
-    public Book getBookByName(String name) {
+    public ArrayList<Book>  getBooksByName(String name) {
+        ArrayList<Book> booklist = new ArrayList<>();
         try (Connection conn = this.ldb.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Books WHERE name=?");
             stmt.setString(1, name);
@@ -124,10 +125,10 @@ public class Database implements Dao {
             // Luodaan Book-olio
             while (res.next()) {
                 Book book = new Book(res.getString("name"), res.getString("author"), res.getString("isbn"), res.getInt("pages"), res.getInt("year"));
-                return book;
+                booklist.add(book);
             }
             stmt.close();
-            return null;
+            return booklist;
         } catch (SQLException ex) {
             return null;
         }
