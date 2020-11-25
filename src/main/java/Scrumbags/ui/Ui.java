@@ -64,12 +64,37 @@ public class Ui {
     }
 
     private void search() {
+        System.out.println("Haetaanko:");
+        System.out.println("1 kirjaa");
+        System.out.println("2 linkkiä?");
+        komento = io.nextLine();
+        if (komento.equals("1")) {
+            searchBook();
+        } else if (komento.equals("2")) {
+            searchLink();
+        } //virheellinen komento
+    }
+    
+    private void searchBook() {
         System.out.println("Minkä kirjailijan kirjat etsitään?");
         String author = io.nextLine();
         ArrayList<Book> booklist = this.service.getBooksByAuthor(author);
         if (booklist != null) {
             for (Book b : booklist) {
                 System.out.println(b);
+            }
+        } else {
+            System.out.println("Ei tuloksia.");
+        }
+    }
+    
+    private void searchLink() {
+        System.out.println("Minkä nimistä linkkiä etsitään?");
+        String name = io.nextLine();
+        ArrayList<Link> linklist = this.service.getLinksByName(name);
+        if (linklist != null) {
+            for (Link l : linklist) {
+                System.out.println(l);
             }
         } else {
             System.out.println("Ei tuloksia.");
