@@ -43,4 +43,24 @@ public class DatabaseFake implements Dao {
         ArrayList<Link>  linklist = new ArrayList<>();
         return linklist;
     }
+
+    @Override
+    public Book getBookByName(String name) {
+        for (Book b: this.books) {
+            if (b.getName().equals(name)) {
+                return b;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Book getBookByIsbn(String isbn) {
+        for (Book b: this.books) {
+            if (b.getIsbn().equals(isbn)) {
+                return b;
+            }
+        }
+        return null;
+    }
 }

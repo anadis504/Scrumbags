@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Scrumbags.database;
 
 import Scrumbags.logic.Book;
@@ -13,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.naming.spi.DirStateFactory.Result;
+
 
 /**
  *
@@ -117,5 +113,41 @@ public class Database implements Dao {
             return null;
         }
 
+    }
+
+    @Override
+    public Book getBookByName(String name) {
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Books WHERE name=?");
+            stmt.setString(1, name);
+            ResultSet res = stmt.executeQuery();
+            // Luodaan Book-olio
+            while (res.next()) {
+                Book book = new Book(res.getString("name"), res.getString("author"), res.getString("isbn"), res.getInt("pages"), res.getInt("year"));
+                return book;
+            }
+            stmt.close();
+            return null;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    @Override
+    public Book getBookByIsbn(String isbn) {
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Books WHERE isbn=?");
+            stmt.setString(1, isbn);
+            ResultSet res = stmt.executeQuery();
+            // Luodaan Book-olio
+            while (res.next()) {
+                Book book = new Book(res.getString("name"), res.getString("author"), res.getString("isbn"), res.getInt("pages"), res.getInt("year"));
+                return book;
+            }
+            stmt.close();
+            return null;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
 }
