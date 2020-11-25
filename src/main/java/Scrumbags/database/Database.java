@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 /**
  *
  * @author tkoukkar
@@ -95,6 +97,25 @@ public class Database implements Dao {
 
     @Override
     public ArrayList<Link> getLinksByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Link> linklist = new ArrayList<>();
+
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Links WHERE name=?");
+            stmt.setString(1, name);
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()) {
+                Link link = new Link(res.getString("name"), res.getString("address"));
+                linklist.add(link);
+            }
+            stmt.close();
+            if (linklist.isEmpty()) {
+                return null;
+            }
+            return linklist;
+        } catch (SQLException e) {
+            return null;
+        }
+
     }
 }
