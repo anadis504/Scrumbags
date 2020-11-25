@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -20,13 +21,10 @@ public class Database implements Dao {
         this.ldb = new Library(path);
         try (Connection conn = this.ldb.getConnection()) {
             String ctinx = "CREATE TABLE IF NOT EXISTS ";
-            PreparedStatement stmt = conn.prepareStatement(
-                    ctinx + "Books (name TEXT, author TEXT, year INTEGER, pages INTEGER, isbn INTEGER UNIQUE);");
-            stmt.executeUpdate();
-            stmt = conn.prepareStatement(
-                    ctinx + "Links (name TEXT, address TEXT);");
-            stmt.executeUpdate();
-            stmt.close();            
+            Statement s = conn.createStatement();
+            s.execute(ctinx + "Books (name TEXT, author TEXT, year INTEGER, pages INTEGER, isbn INTEGER UNIQUE);");
+            s.execute(ctinx + "Links (name TEXT, address TEXT);");
+            s.close();
         } catch (SQLException ex) {
             System.out.println("Virhe luotaessa tietokantatauluja. Yritä käynnistää ohjelma uudestaan.");
         }
