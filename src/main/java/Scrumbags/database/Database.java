@@ -1,4 +1,3 @@
-
 package Scrumbags.database;
 
 import Scrumbags.logic.Book;
@@ -9,17 +8,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
-
 /**
  *
  * @author tkoukkar
  */
 public class Database implements Dao {
+
     private Library ldb;
-    
-    public Database(String path) throws ClassNotFoundException {        
+
+    public Database(String path) throws ClassNotFoundException {
         this.ldb = new Library(path);
+        try (Connection conn = this.ldb.getConnection()) {
+            String ctinx = "CREATE TABLE IF NOT EXISTS ";
+            PreparedStatement stmt = conn.prepareStatement(
+                    ctinx + "Books (name TEXT, author TEXT, year INTEGER, pages INTEGER, isbn INTEGER UNIQUE);");
+            stmt.executeUpdate();
+            stmt = conn.prepareStatement(
+                    ctinx + "Links (name TEXT, address TEXT);");
+            stmt.executeUpdate();
+            stmt.close();            
+        } catch (SQLException ex) {
+            System.out.println("Virhe luotaessa tietokantatauluja. Yritä käynnistää ohjelma uudestaan.");
+        }
     }
 
     @Override
@@ -29,22 +39,22 @@ public class Database implements Dao {
         String isbn = book.getIsbn();
         int year = book.getYear();
         int pages = book.getPages();
-        
+
         try (Connection conn = this.ldb.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Books (name, author, year, pages, isbn) VALUES (?, ?, ?, ?, ?)");
-            
+
             stmt.setString(1, name);
             stmt.setString(2, author);
             stmt.setInt(3, year);
             stmt.setInt(4, pages);
             stmt.setString(5, isbn);
-            
+
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException ex) {
             return false;
         }
-        
+
         return true;
     }
 
@@ -52,26 +62,26 @@ public class Database implements Dao {
     public boolean addLink(Link link) {
         String name = link.getName();
         String address = link.getAdress();
-        
+
         try (Connection conn = this.ldb.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Links (name, address) VALUES (?, ?)");
-            
+
             stmt.setString(1, name);
             stmt.setString(2, address);
-            
+
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException ex) {
             return false;
         }
-        
+
         return true;
     }
 
     @Override
     public ArrayList<Book> getBooksByAuthor(String author) {
         ArrayList<Book> booklist = new ArrayList<>();
-        
+
         try (Connection conn = this.ldb.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Books WHERE author=?");
             stmt.setString(1, author);
@@ -116,7 +126,7 @@ public class Database implements Dao {
     }
 
     @Override
-    public ArrayList<Book>  getBooksByName(String name) {
+    public ArrayList<Book> getBooksByName(String name) {
         ArrayList<Book> booklist = new ArrayList<>();
         try (Connection conn = this.ldb.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Books WHERE name=?");
