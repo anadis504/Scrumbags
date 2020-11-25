@@ -28,4 +28,8 @@ public class Service {
     public ArrayList<Book> getBooksByAuthor(String author) {
         return this.database.getBooksByAuthor(author);
     }
+    
+    public ArrayList<Link> getLinksByName(String name) {
+        return this.database.getLinksByName(name);
+    }
 }
