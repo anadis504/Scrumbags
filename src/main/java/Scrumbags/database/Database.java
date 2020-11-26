@@ -23,7 +23,7 @@ public class Database implements Dao {
             String ctinx = "CREATE TABLE IF NOT EXISTS ";
             Statement s = conn.createStatement();
             s.execute(ctinx + "Books (name TEXT, author TEXT, year INTEGER, pages INTEGER, isbn INTEGER UNIQUE);");
-            s.execute(ctinx + "Links (name TEXT, address TEXT);");
+            s.execute(ctinx + "Links (name TEXT, address TEXT UNIQUE);");
             s.close();
         } catch (SQLException ex) {
             System.out.println("Virhe luotaessa tietokantatauluja. Yritä käynnistää ohjelma uudestaan.");

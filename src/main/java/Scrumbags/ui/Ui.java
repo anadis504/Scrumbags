@@ -162,7 +162,7 @@ public class Ui {
                 + "ISBN: " + ISBN + "\n"
                 + "SIVUMÄÄRÄ: " + sivumaara + "\n"
                 + "JULKAISUVUOSI: " + julkaisuvuosi + "\n"
-                + "ONKO OK? [y/n]");
+                + "ONKO OK? [k/e]");
         if (yesNo()) {
             if (service.addBook(nimi, kirjailija, ISBN, sivumaara, julkaisuvuosi)) {
                 io.print("Kirja lisätty onnistuneesti.");
@@ -183,7 +183,7 @@ public class Ui {
         io.print("LISÄTÄÄN URL: \n"
                 + "NIMI: " + nimi + "\n"
                 + "URL: " + URL + "\n"
-                + "ONKO OK? [y/n]");
+                + "ONKO OK? [k/e]");
         if (yesNo()) {
             if (service.addLink(nimi, URL)) {
                 io.print("Linkki lisätty onnistuneesti.");
@@ -216,9 +216,9 @@ public class Ui {
     private boolean yesNo() {
         while (true) {
             komento = io.nextLine();
-            if (komento.equals("y")) {
+            if (komento.equals("y") || komento.equals("k")) {
                 return true;
-            } else if (komento.equals("n")) {
+            } else if (komento.equals("n") || komento.equals("e")) {
                 return false;
             }
         }
