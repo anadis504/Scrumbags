@@ -7,7 +7,8 @@ public interface Dao {
     boolean addBook(Book book);
     boolean addLink(Link link);
     ArrayList<Book> getBooksByName(String name);
-    Book getBookByIsbn(String isbn);
     ArrayList<Book> getBooksByAuthor(String author);
+    Book getBookByIsbn(String isbn);
+    ArrayList<Book> getBooksByYear(int year);
     ArrayList<Link> getLinksByName(String name);
 }

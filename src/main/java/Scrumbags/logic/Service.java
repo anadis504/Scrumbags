@@ -35,10 +35,22 @@ public class Service {
         return this.database.addLink(link);
     }
 
+    public ArrayList<Book> getBooks(String search, String by) {
+        if (by.equals("1")) {
+            return getBooksByAuthor(search);
+        } else if (by.equals("2")) {
+            return getBooksByName(search);
+        } else if (by.equals("3")) {
+            return getBooksByYear(Integer.parseInt(search));
+        } else if (by.equals("4")) {
+            return getBookByIsbn(search);
+        }
+        return null;
+    }
+    
     public ArrayList<Book> getBooksByAuthor(String author) {
         return this.database.getBooksByAuthor(author);
     }
-    
 
     public ArrayList<Link> getLinksByName(String name) {
         return this.database.getLinksByName(name);
@@ -48,12 +60,27 @@ public class Service {
         return database.getBooksByName(name);
     }
     
+    public ArrayList<Book> getBooksByYear(int year) {
+        return database.getBooksByYear(year);
+    }
+    
+    public ArrayList<Book> getBookByIsbn(String isbn) {
+        if (bookIsbnExists(isbn)) {
+            ArrayList<Book> result = new ArrayList<>();
+            
+            Book book = database.getBookByIsbn(isbn);// ISBN-haku palauttaa yhden tuloksen.
+            result.add(book);
+            
+            return result;
+        }
+        return null;
+    }
+    
     public boolean bookIsbnExists(String isbn) {
         return database.getBookByIsbn(isbn) != null;
     }
     
     public boolean bookNameExists(String name) {
         return database.getBooksByName(name) != null;
-
     }
 }
