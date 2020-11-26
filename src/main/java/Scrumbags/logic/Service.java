@@ -65,12 +65,15 @@ public class Service {
     }
     
     public ArrayList<Book> getBookByIsbn(String isbn) {
-        ArrayList<Book> result = new ArrayList<>();
- 
-        Book book = database.getBookByIsbn(isbn);   // ISBN-haku palauttaa aina yhden tuloksen.
-        result.add(book);
-    
-        return result;
+        if (bookIsbnExists(isbn)) {
+            ArrayList<Book> result = new ArrayList<>();
+            
+            Book book = database.getBookByIsbn(isbn);// ISBN-haku palauttaa yhden tuloksen.
+            result.add(book);
+            
+            return result;
+        }
+        return null;
     }
     
     public boolean bookIsbnExists(String isbn) {
