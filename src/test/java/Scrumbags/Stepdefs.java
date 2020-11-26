@@ -41,7 +41,7 @@ public class Stepdefs {
     @After
     public void tearDown() {
         try {
-            File db = new File("test.db");
+            File db = new File(testDatabaseName);
             db.delete();
         } catch (Exception e) {
             System.out.println("Exception: " + e);

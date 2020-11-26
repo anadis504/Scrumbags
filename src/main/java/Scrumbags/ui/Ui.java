@@ -14,7 +14,7 @@ public class Ui {
     private IO io;
     private Service service;
     private String[] str;
-    private Database database;
+    private Dao database;
     private String komento;
 
     /**
