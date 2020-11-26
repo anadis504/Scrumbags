@@ -65,8 +65,8 @@ public class Ui {
 
     private void search() {
         System.out.println("Haetaanko:");
-        System.out.println("1 kirjaa");
-        System.out.println("2 linkkiä?");
+        System.out.println("1) kirjaa");
+        System.out.println("2) linkkiä?");
         komento = io.nextLine();
         if (komento.equals("1")) {
             searchBook();
@@ -76,9 +76,20 @@ public class Ui {
     }
     
     private void searchBook() {
-        System.out.println("Minkä kirjailijan kirjat etsitään?");
-        String author = io.nextLine();
-        ArrayList<Book> booklist = this.service.getBooksByAuthor(author);
+        System.out.println("Valitse hakuperuste:");
+        System.out.println("1) kirjailijan nimi");
+        System.out.println("2) kirjan nimi");
+        System.out.println("3) julkaisuvuosi");
+        System.out.println("4) ISBN");
+        komento = io.nextLine();
+        
+        if (komento.equals("1") || komento.equals("2")) {
+            System.out.println("Syötä haettava nimi:");
+        } else if (komento.equals("3") || komento.equals("4")) {
+            System.out.println("Syötä haettava luku:");
+        } //virheellinen komento
+        String search = io.nextLine();
+        ArrayList<Book> booklist = this.service.getBooks(search, komento);
         if (booklist != null) {
             for (Book b : booklist) {
                 System.out.println(b);
@@ -123,7 +134,7 @@ public class Ui {
             ISBN = "---";
         }
 
-        io.print("Anna kirjain sivumäärä");
+        io.print("Anna kirjan sivumäärä");
         komento = io.nextLine();
         while (!checkIfNumber(komento) && !checkIfQ(komento)) {
             komento = io.nextLine();
@@ -134,7 +145,7 @@ public class Ui {
             sivumaara = Integer.parseInt(komento);
         }
 
-        io.print("Anna kirjain julkaisuvuosi");
+        io.print("Anna kirjan julkaisuvuosi");
         komento = io.nextLine();
         while (!checkIfNumber(komento) && !checkIfQ(komento)) {
             komento = io.nextLine();

@@ -161,4 +161,22 @@ public class Database implements Dao {
             return null;
         }
     }
+
+    @Override
+    public ArrayList<Book> getBooksByYear(int year) {
+        ArrayList<Book> booklist = new ArrayList<>();
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Books WHERE year=?");
+            stmt.setInt(1, year);
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                Book book = new Book(res.getString("name"), res.getString("author"), res.getString("isbn"), res.getInt("pages"), res.getInt("year"));
+                booklist.add(book);
+            }
+            stmt.close();
+            return booklist;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
 }

@@ -68,4 +68,9 @@ public class DatabaseFake implements Dao {
         }
         return null;
     }
+
+    @Override
+    public ArrayList<Book> getBooksByYear(int year) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
