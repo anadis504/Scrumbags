@@ -22,7 +22,7 @@ public class Database implements Dao {
         try (Connection conn = this.ldb.getConnection()) {
             String ctinx = "CREATE TABLE IF NOT EXISTS ";
             Statement s = conn.createStatement();
-            s.execute(ctinx + "Books (name TEXT, author TEXT, year INTEGER, pages INTEGER, isbn INTEGER UNIQUE);");
+            s.execute(ctinx + "Books (name TEXT, author TEXT, year INTEGER, pages INTEGER, isbn INTEGER);");
             s.execute(ctinx + "Links (name TEXT, address TEXT UNIQUE);");
             s.close();
         } catch (SQLException ex) {
