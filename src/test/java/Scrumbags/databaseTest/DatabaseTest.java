@@ -92,11 +92,12 @@ public class DatabaseTest {
     public void bookCannotBeFoundByISBNBeforeItIsAdded() {
         assertEquals(null, db.getBookByIsbn("978-951-1-36427-6"));
     }
-
+    
+    /* Obsolete test, validation done on service-level
     @Test
     public void addingExistingBookWithSameISBNReturnsFalse() {
         assertFalse(db.addBook(joulupukinLomakirja));
-    }
+    }*/
 
     @Test
     public void addingExistingBookWithoutISBNReturnsTrue() {
