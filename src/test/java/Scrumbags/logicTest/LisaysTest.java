@@ -73,6 +73,19 @@ public class LisaysTest {
         this.service.addBook("nimi", "kirjailija", "isbn1234", 123, 123);
         assertFalse(this.service.addBook("1", "2", "isbn1234", 3, 4));
     }
+
+    @Test
+    public void isbnSearchReturnsRightBook() {
+        this.service.addBook("ASD", "WASD", "123-14", 50, 13);
+        ArrayList<Book> booklist = this.service.getBookByIsbn("123-14");
+        boolean found = false;
+        for (Book b: booklist) {
+            if (b.getName().equals("ASD") && b.getIsbn().equals("123-14") && b.getPages() == 50 && b.getYear() == 13) {
+                found = true;
+            }
+        }
+        assertEquals(true, found);
+    }
     
 //    @Test
 //    public void bookmarkAmountIsRight() {
