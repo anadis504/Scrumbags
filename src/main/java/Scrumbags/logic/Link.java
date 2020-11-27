@@ -48,4 +48,9 @@ public class Link {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "\nNimi: "+getName()+"\nURL: "+getAdress();
+    }
 }
