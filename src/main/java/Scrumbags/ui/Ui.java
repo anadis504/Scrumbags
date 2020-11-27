@@ -120,62 +120,19 @@ public class Ui {
         int julkaisuvuosi;
 
         io.print("Anna kirjan nimi (pakollinen tieto).");
-        komento = io.nextLine();
-        while (komento.isEmpty()) {
-            io.print("Anna syöte (vähintään yhden merkin pituinen).");
-            komento = io.nextLine();
-        }
-        if (komento.equals("q")) {
-            nimi = "---";
-        } else {
-            nimi = komento;
-        }
+        nimi = promptTextInput("Anna kirjan nimi (vähintään yhden merkin pituinen).", false);
 
         io.print("Anna kirjailijan nimi (ohita syöttämällä \"q\").");
-        komento = io.nextLine();
-        while (komento.isEmpty() && !checkIfQ(komento)) {
-            io.print("Anna syöte tai kirjoita \"q\"");
-            komento = io.nextLine();
-        }
-        if (komento.equals("q")) {
-            kirjailija = "---";
-        } else {
-            kirjailija = komento;
-        }
+        kirjailija = promptTextInput("Anna kirjailijan nimi tai ohita syöttämällä \"q\"", true);
 
         io.print("Anna ISBN (ohita syöttämällä \"q\").");
-        komento = io.nextLine();
-        while (komento.isEmpty() && !checkIfQ(komento)) {
-            io.print("Anna syöte tai kirjoita \"q\"");
-            komento = io.nextLine();
-        }
-        if (komento.equals("q")) {
-            ISBN = "---";
-        } else {
-            ISBN = komento;
-        }
+        ISBN = promptTextInput("Anna ISBN tai ohita syöttämällä \"q\"", true);
 
         io.print("Anna kirjan sivumäärä (ohita syöttämällä \"q\")");
-        komento = io.nextLine();
-        while (!checkIfNumber(komento) && !checkIfQ(komento)) {
-            komento = io.nextLine();
-        }
-        if (checkIfQ(komento)) {
-            sivumaara = -1;
-        } else {
-            sivumaara = Integer.parseInt(komento);
-        }
+        sivumaara = promptNumberInput("Anna sivumäärä tai ohita syöttämällä \"q\"", true);
 
         io.print("Anna kirjan julkaisuvuosi (ohita syöttämällä \"q\")");
-        komento = io.nextLine();
-        while (!checkIfNumber(komento) && !checkIfQ(komento)) {
-            komento = io.nextLine();
-        }
-        if (checkIfQ(komento)) {
-            julkaisuvuosi = -1;
-        } else {
-            julkaisuvuosi = Integer.parseInt(komento);
-        }
+        julkaisuvuosi = promptNumberInput("Anna vuosiluku tai ohita syöttämällä \"q\"", true);
 
         io.print("LISÄTÄÄN KIRJA: \n"
                 + "NIMI: " + nimi + "\n"
@@ -196,22 +153,13 @@ public class Ui {
     private void addLink() {
         String nimi;
         String URL;
+        
         io.print("Anna Linkin nimi (pakollinen).");
-        komento = io.nextLine();
-        while (komento.isEmpty()) {
-            io.print("Anna syöte (vähintään yhden merkin pituinen).");
-            komento = io.nextLine();
-        }
-        nimi = komento;
+        nimi = promptTextInput("Anna Linkin nimi (vähintään yhden merkin pituinen).", false);
 
         io.print("Anna URL (pakollinen).");
-        komento = io.nextLine();
-        while (komento.isEmpty()) {
-            io.print("Anna syöte (vähintään yhden merkin pituinen).");
-            komento=io.nextLine();
-        }
-        URL = komento;
-        
+        URL = promptTextInput("Anna URL (vähintään yhden merkin pituinen).", false);
+
         io.print("LISÄTÄÄN URL: \n"
                 + "NIMI: " + nimi + "\n"
                 + "URL: " + URL + "\n"
@@ -221,6 +169,35 @@ public class Ui {
                 io.print("Linkki lisätty onnistuneesti.");
             } else {
                 io.print("Linkkiä ei onnistuttu lisäämään.");
+            }
+        }
+    }
+
+    private String promptTextInput(String messageIfInvalid, boolean canSkipWithQ) {
+        String input = io.nextLine();
+        while (true) {
+            if (canSkipWithQ && input.equals("q")) {
+                return "---";
+            }
+            if (!input.isEmpty()) {
+                return input;
+            }
+            io.print(messageIfInvalid);
+            input = io.nextLine();
+        }
+    }
+
+    private int promptNumberInput(String messageIfInvalid, boolean canSkipWithQ) {
+        String input = io.nextLine();
+        while (true) {
+            if (canSkipWithQ && input.equals("q")) {
+                return -1;
+            }
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                io.print(messageIfInvalid);
+                input = io.nextLine();
             }
         }
     }
