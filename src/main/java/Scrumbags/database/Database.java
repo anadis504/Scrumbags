@@ -135,6 +135,9 @@ public class Database implements Dao {
                 booklist.add(book);
             }
             stmt.close();
+            if (booklist.isEmpty()) {
+                return null;
+            }
             return booklist;
         } catch (SQLException ex) {
             return null;
@@ -174,6 +177,9 @@ public class Database implements Dao {
                 booklist.add(book);
             }
             stmt.close();
+            if (booklist.isEmpty()) {
+                return null;
+            }
             return booklist;
         } catch (SQLException ex) {
             return null;
