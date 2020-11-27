@@ -64,9 +64,9 @@ public class Ui {
     }
 
     private void search() {
-        System.out.println("Haetaanko:");
-        System.out.println("1) kirjaa");
-        System.out.println("2) linkkiä?");
+        io.print("Haetaanko:");
+        io.print("1) kirjaa");
+        io.print("2) linkkiä?");
         komento = io.nextLine();
         if (komento.equals("1")) {
             searchBook();
@@ -76,39 +76,39 @@ public class Ui {
     }
 
     private void searchBook() {
-        System.out.println("Valitse hakuperuste:");
-        System.out.println("1) kirjailijan nimi");
-        System.out.println("2) kirjan nimi");
-        System.out.println("3) julkaisuvuosi");
-        System.out.println("4) ISBN");
+        io.print("Valitse hakuperuste:");
+        io.print("1) kirjailijan nimi");
+        io.print("2) kirjan nimi");
+        io.print("3) julkaisuvuosi");
+        io.print("4) ISBN");
         komento = io.nextLine();
 
         if (komento.equals("1") || komento.equals("2")) {
-            System.out.println("Syötä haettava nimi:");
+            io.print("Syötä haettava nimi:");
         } else if (komento.equals("3") || komento.equals("4")) {
-            System.out.println("Syötä haettava luku:");
+            io.print("Syötä haettava luku:");
         } //virheellinen komento
         String search = io.nextLine();
         ArrayList<Book> booklist = this.service.getBooks(search, komento);
         if (booklist != null) {
             for (Book b : booklist) {
-                System.out.println(b);
+                io.print(b.toString());
             }
         } else {
-            System.out.println("Ei tuloksia.");
+            io.print("Ei tuloksia.");
         }
     }
 
     private void searchLink() {
-        System.out.println("Minkä nimistä linkkiä etsitään?");
+        io.print("Minkä nimistä linkkiä etsitään?");
         String name = io.nextLine();
         ArrayList<Link> linklist = this.service.getLinksByName(name);
         if (linklist != null) {
             for (Link l : linklist) {
-                System.out.println(l);
+                io.print(l.toString());
             }
         } else {
-            System.out.println("Ei tuloksia.");
+            io.print("Ei tuloksia.");
         }
     }
 
@@ -253,6 +253,7 @@ public class Ui {
             } else if (komento.equals("n") || komento.equals("e")) {
                 return false;
             }
+            io.print("Onko OK? Syötä k (kyllä, kirja lisätään) tai e (ei, lisäys peruutetaan).");
         }
     }
 }
