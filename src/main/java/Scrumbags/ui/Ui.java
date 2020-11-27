@@ -74,7 +74,7 @@ public class Ui {
             searchLink();
         } //virheellinen komento
     }
-    
+
     private void searchBook() {
         System.out.println("Valitse hakuperuste:");
         System.out.println("1) kirjailijan nimi");
@@ -82,7 +82,7 @@ public class Ui {
         System.out.println("3) julkaisuvuosi");
         System.out.println("4) ISBN");
         komento = io.nextLine();
-        
+
         if (komento.equals("1") || komento.equals("2")) {
             System.out.println("Syötä haettava nimi:");
         } else if (komento.equals("3") || komento.equals("4")) {
@@ -98,7 +98,7 @@ public class Ui {
             System.out.println("Ei tuloksia.");
         }
     }
-    
+
     private void searchLink() {
         System.out.println("Minkä nimistä linkkiä etsitään?");
         String name = io.nextLine();
@@ -119,22 +119,43 @@ public class Ui {
         int sivumaara;
         int julkaisuvuosi;
 
-        io.print("Anna kirjan nimi.");
-        nimi = io.nextLine();
+        io.print("Anna kirjan nimi (pakollinen tieto).");
+        komento = io.nextLine();
+        while (komento.isEmpty()) {
+            io.print("Anna syöte (vähintään yhden merkin pituinen).");
+            komento = io.nextLine();
+        }
+        if (komento.equals("q")) {
+            nimi = "---";
+        } else {
+            nimi = komento;
+        }
 
-        io.print("Anna kirjailijan nimi.");
-        kirjailija = io.nextLine();
-        if (kirjailija.equals("q")) {
+        io.print("Anna kirjailijan nimi (ohita syöttämällä \"q\").");
+        komento = io.nextLine();
+        while (komento.isEmpty() && !checkIfQ(komento)) {
+            io.print("Anna syöte tai kirjoita \"q\"");
+            komento = io.nextLine();
+        }
+        if (komento.equals("q")) {
             kirjailija = "---";
+        } else {
+            kirjailija = komento;
         }
 
-        io.print("Anna ISBN.");
-        ISBN = io.nextLine();
-        if (ISBN.equals("q")) {
+        io.print("Anna ISBN (ohita syöttämällä \"q\").");
+        komento = io.nextLine();
+        while (komento.isEmpty() && !checkIfQ(komento)) {
+            io.print("Anna syöte tai kirjoita \"q\"");
+            komento = io.nextLine();
+        }
+        if (komento.equals("q")) {
             ISBN = "---";
+        } else {
+            ISBN = komento;
         }
 
-        io.print("Anna kirjan sivumäärä");
+        io.print("Anna kirjan sivumäärä (ohita syöttämällä \"q\")");
         komento = io.nextLine();
         while (!checkIfNumber(komento) && !checkIfQ(komento)) {
             komento = io.nextLine();
@@ -145,7 +166,7 @@ public class Ui {
             sivumaara = Integer.parseInt(komento);
         }
 
-        io.print("Anna kirjan julkaisuvuosi");
+        io.print("Anna kirjan julkaisuvuosi (ohita syöttämällä \"q\")");
         komento = io.nextLine();
         while (!checkIfNumber(komento) && !checkIfQ(komento)) {
             komento = io.nextLine();
@@ -175,11 +196,22 @@ public class Ui {
     private void addLink() {
         String nimi;
         String URL;
-        io.print("Anna Linkin nimi.");
-        nimi = io.nextLine();
+        io.print("Anna Linkin nimi (pakollinen).");
+        komento = io.nextLine();
+        while (komento.isEmpty()) {
+            io.print("Anna syöte (vähintään yhden merkin pituinen).");
+            komento = io.nextLine();
+        }
+        nimi = komento;
 
-        io.print("Anna URL.");
-        URL = io.nextLine();
+        io.print("Anna URL (pakollinen).");
+        komento = io.nextLine();
+        while (komento.isEmpty()) {
+            io.print("Anna syöte (vähintään yhden merkin pituinen).");
+            komento=io.nextLine();
+        }
+        URL = komento;
+        
         io.print("LISÄTÄÄN URL: \n"
                 + "NIMI: " + nimi + "\n"
                 + "URL: " + URL + "\n"

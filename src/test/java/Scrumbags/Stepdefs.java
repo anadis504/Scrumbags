@@ -61,7 +61,7 @@ public class Stepdefs {
         input.add(isbn);
         input.add(pages);
         input.add(year);
-        input.add("y");
+        input.add("k");
         input.add("q");
         
         io = new StubIO(input);
@@ -83,7 +83,7 @@ public class Stepdefs {
     public void validLinkAttributesEnteredAndInputConfirmed(String name, String url) {
         input.add(name);
         input.add(url);
-        input.add("y");
+        input.add("k");
         input.add("q");
         
         io = new StubIO(input);
