@@ -54,6 +54,21 @@ public class DatabaseTest {
     }
 
     @Test
+    public void existingBookCanBeFoundByName() {
+        assertTrue(db.getBooksByName("Joulupukin lomakirja").contains(joulupukinLomakirja));
+    }
+
+    @Test
+    public void existingBookCanBeFoundByYear() {
+        assertTrue(db.getBooksByYear(2020).contains(joulupukinLomakirja));
+    }
+
+    @Test
+    public void existingLinkCanBeFoundByName() {
+        assertTrue(db.getLinksByName("Tietorakenteet ja algoritmit").contains(tira));
+    }
+
+    @Test
     public void afterAddingNewValidBookItCanBeFoundByAuthor() {
         db.addBook(kuinkaPuutKasvavat);
         assertTrue(db.getBooksByAuthor("Saku Tuominen").contains(kuinkaPuutKasvavat));
@@ -62,7 +77,7 @@ public class DatabaseTest {
     @Test
     public void afterAddingNewValidBookItCanBeFoundByISBN() {
         db.addBook(kuinkaPuutKasvavat);
-        assertEquals(kuinkaPuutKasvavat,(db.getBookByIsbn("978-951-1-36427-6")));
+        assertEquals(kuinkaPuutKasvavat, (db.getBookByIsbn("978-951-1-36427-6")));
     }
 
     @Test
@@ -73,7 +88,7 @@ public class DatabaseTest {
 
     @Test
     public void bookCannotBeFoundByISBNBeforeItIsAdded() {
-        assertEquals(null,db.getBookByIsbn("978-951-1-36427-6"));
+        assertEquals(null, db.getBookByIsbn("978-951-1-36427-6"));
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
