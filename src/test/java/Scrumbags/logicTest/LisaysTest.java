@@ -86,6 +86,11 @@ public class LisaysTest {
         }
         assertEquals(true, found);
     }
+
+    @Test
+    public void isbnSearchFailsIfBookNotAddedYet() {
+        assertNull(this.service.getBookByIsbn("123-14"));
+    }
     
 //    @Test
 //    public void bookmarkAmountIsRight() {
