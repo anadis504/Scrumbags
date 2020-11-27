@@ -67,6 +67,12 @@ public class LisaysTest {
         this.service.addBook("MAGA", "Nobody");
         assertEquals(3, this.service.getBooksByAuthor("Nobody").size());
     }
+
+    @Test
+    public void noDuplicateBooksAdded() {
+        this.service.addBook("nimi", "kirjailija", "isbn1234", 123, 123);
+        assertFalse(this.service.addBook("1", "2", "isbn1234", 3, 4));
+    }
     
 //    @Test
 //    public void bookmarkAmountIsRight() {
