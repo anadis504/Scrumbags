@@ -92,6 +92,32 @@ public class LisaysTest {
         assertNull(this.service.getBookByIsbn("123-14"));
     }
     
+    
+    @Test
+    public void yearSearchReturnsRightBook() {
+        this.service.addBook("ABC", "Taavi", "123-14", 50, 2005);
+        ArrayList<Book> booklist = this.service.getBooksByYear(2005);
+        boolean found = false;
+        for (Book b: booklist) {
+            if (b.getName().equals("ABC") && b.getIsbn().equals("123-14") && b.getPages() == 50 && b.getYear() == 2005) {
+                found = true;
+            }
+        }
+        assertEquals(true, found);
+    }
+
+    @Test
+    public void yearSearchFailsIfBookNotAddedYet() {
+        assertNull(this.service.getBooksByYear(1044));
+    }
+    
+    @Test
+    public void yearSearchFailsIfYearDoesNotExistsInAnyBook() {
+        this.service.addBook("ABC", "Taavi", "123-14", 50, 2005);
+        this.service.addBook("nimi", "kirjailija", "isbn1234", 123, 123);
+        assertNull(this.service.getBooksByYear(2000));
+    }
+    
 //    @Test
 //    public void bookmarkAmountIsRight() {
 //        this.service.addBook("Aapinen", "Tuntematon");

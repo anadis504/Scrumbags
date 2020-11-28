@@ -71,6 +71,15 @@ public class DatabaseFake implements Dao {
 
     @Override
     public ArrayList<Book> getBooksByYear(int year) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Book> booklist = new ArrayList<>();
+        for (Book b: this.books) {
+            if (b.getYear() == year) {
+                booklist.add(b);
+            }
+        }
+        if (booklist.isEmpty()) {
+            return null;
+        }
+        return booklist;
     }
 }
