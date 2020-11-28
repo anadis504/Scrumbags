@@ -101,6 +101,32 @@ public class Stepdefs {
         assertTrue(io.getOutput().contains("Ei tuloksia."));
     }
     
+    @Given("command search book by year is selected")
+    public void commandSearchBookByYearIsSelected() {
+        input.add("1");
+        input.add("3");
+    }
+    
+    @When("a non-existing year {string} is entered")
+    public void nonExistingYearIsEntered(String year) {
+        input.add(year);
+        input.add("q");
+
+        io = new StubIO(input);
+        ui = new Ui(io, service);
+        ui.run(true);
+    }
+    
+    @When("a valid year {string} is entered")
+    public void validYearIsEntered(String year) {
+        input.add(year);
+        input.add("q");
+
+        io = new StubIO(input);
+        ui = new Ui(io, service);
+        ui.run(true);
+    }
+    
     @Given("command add book is selected")
     public void commandAddBookSelected() {
         input.add("1");
