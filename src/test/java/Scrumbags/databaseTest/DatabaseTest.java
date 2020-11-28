@@ -108,12 +108,18 @@ public class DatabaseTest {
 
     @Test
     public void nonExistingBookCannotBeFoundByName() {
-        assertFalse(db.getBooksByName(pizze.getName()).contains(pizze));
+        ArrayList<Book> results = db.getBooksByYear(pizze.getYear());
+        if (results != null) {
+            assertFalse(results.contains(pizze));
+        }
     }
 
     @Test
     public void nonExistingBookCannotBeFoundByYear() {
-        assertFalse(db.getBooksByYear(pizze.getYear()).contains(pizze));
+        ArrayList<Book> results = db.getBooksByYear(pizze.getYear());
+        if (results != null) {
+            assertFalse(results.contains(pizze));
+        }
     }
     
     @Test
