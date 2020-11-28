@@ -36,6 +36,8 @@ public class Stepdefs {
         dao = new Database("jdbc:sqlite:"+testDatabaseName);
         input = new ArrayList<>();
         service = new Service(dao);
+        Book bonanza = new Book("Bonanza", "David R Greenland", "9781593935412", 170, 2015);
+        dao.addBook(bonanza);
     }
     
     @After
@@ -48,6 +50,56 @@ public class Stepdefs {
         }
     }    
     
+    
+    
+    
+    @Given("command search is selected")
+    public void commandSearchIsSelected() {
+        input.add("3");
+    }
+    
+    @Given("command search book by isbn is selected")
+    public void commandSearchBookByIsbnIsSelected() {
+        input.add("1");
+        input.add("4");
+    }
+    
+    @When("a valid isbn {string} is entered")
+    public void validIsbnIsEntered(String isbn) {
+        input.add(isbn);
+        input.add("q");
+
+        io = new StubIO(input);
+        ui = new Ui(io, service);
+        ui.run(true);
+    }
+    
+    // Tämän testin voisi muotoilla paremmin .feature -tiedostoon että missä
+    // muodossa kirjan tietojen tuloste tarkistetaan
+    @Then("bookmark details {string} are shown in terminal")
+    public void bookmarkDetailsAreShown(String string) {
+        boolean found = false;
+        for (String line : io.getOutput()) {
+            if (line.contains(string)) found = true;
+        }
+        assertTrue(found);
+    }
+    
+        
+    @When("an invalid isbn {string} is entered")
+    public void inValidIsbnIsEntered(String isbn) {
+        input.add(isbn);
+        input.add("q");
+
+        io = new StubIO(input);
+        ui = new Ui(io, service);
+        ui.run(true);
+    }
+    
+    @Then("search has no results")
+    public void searchHasNoResults() {
+        assertTrue(io.getOutput().contains("Ei tuloksia."));
+    }
     
     @Given("command add book is selected")
     public void commandAddBookSelected() {
