@@ -13,6 +13,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
 
 /**
 * Perustestit tietokantaan lisäämiselle
@@ -50,7 +52,7 @@ public class LisaysTest {
     @Test
     public void searchReturnsRightBook() {
         this.service.addBook("ABC", "Taavi", "123-14", 50, 2005);
-        ArrayList<Book> booklist = this.service.getBooksByAuthor("Taavi");
+        ArrayList<Book> booklist = this.service.getBooks("Taavi", "1");
         boolean found = false;
         for (Book b: booklist) {
             if (b.getName().equals("ABC") && b.getIsbn().equals("123-14") && b.getPages() == 50 && b.getYear() == 2005) {
@@ -92,11 +94,10 @@ public class LisaysTest {
         assertNull(this.service.getBookByIsbn("123-14"));
     }
     
-    
     @Test
     public void yearSearchReturnsRightBook() {
         this.service.addBook("ABC", "Taavi", "123-14", 50, 2005);
-        ArrayList<Book> booklist = this.service.getBooksByYear(2005);
+        ArrayList<Book> booklist = this.service.getBooks("2005", "3");
         boolean found = false;
         for (Book b: booklist) {
             if (b.getName().equals("ABC") && b.getIsbn().equals("123-14") && b.getPages() == 50 && b.getYear() == 2005) {
@@ -117,6 +118,31 @@ public class LisaysTest {
         this.service.addBook("nimi", "kirjailija", "isbn1234", 123, 123);
         assertNull(this.service.getBooksByYear(2000));
     }
+    
+    @Test
+    public void nameSearchReturnsRightBook() {
+        this.service.addBook("ABC", "Taavi", "123-14", 50, 2005);
+        ArrayList<Book> booklist = this.service.getBooks("ABC", "2");
+        boolean found = false;
+        for (Book b: booklist) {
+            if (b.getName().equals("ABC") && b.getIsbn().equals("123-14") && b.getPages() == 50 && b.getYear() == 2005) {
+                found = true;
+            }
+        }
+        assertEquals(true, found);
+    }
+
+    /* @Test
+    public void nameSearchFailsIfBookNotAddedYet() {
+        assertNull(this.service.getBooksByName("XYZ"));
+    }
+    
+    @Test
+    public void nameSearchFailsIfNoBookWithNameGivenExists() {
+        this.service.addBook("ABC", "Taavi", "123-14", 50, 2005);
+        this.service.addBook("nimi", "kirjailija", "isbn1234", 123, 123);
+        assertNull(this.service.getBooksByName("XYZ"));
+    } */
     
 //    @Test
 //    public void bookmarkAmountIsRight() {
