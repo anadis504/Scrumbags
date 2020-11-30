@@ -170,12 +170,12 @@ public class Stepdefs {
     public void theBookIsNotAddedBecauseNameIsTaken() {
         assertTrue(io.getOutput().contains("Kirjaa ei onnistuttu lisäämään."));
     }
-    
+
     @When("two books with the same isbn {string} are entered")
     public void twoBooksWithTheSameIsbnAreEntered(String isbn) {
         input.add("Bonanza2");
-        input.add(isbn);
         input.add("q");
+        input.add(isbn);
         input.add("q");
         input.add("q");
         input.add("k");
