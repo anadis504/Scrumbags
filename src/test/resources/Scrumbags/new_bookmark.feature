@@ -5,10 +5,10 @@ Feature: User can create new bookmark
         When  valid book name "Story of Scrumbags", writer name "Test Writer". ISBN "123-45-67890-12-3", number of pages "123" and publication year "2020" are entered and input is confirmed
         Then  new bookmark for a book is created
 
-    Scenario: user can't add two books with the same name
+    Scenario: user can add two books with the same name
         Given command add book is selected
         When two books with the same name "Bonanza" are entered
-        Then the book is not added because name is taken
+        Then new bookmark for a book is created
 
     Scenario: user can't add two books with the same isbn
         Given command add book is selected
