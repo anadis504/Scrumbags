@@ -13,7 +13,7 @@ Feature: User can create new bookmark
     Scenario: user can't add two books with the same isbn
         Given command add book is selected
         When two books with the same isbn "9781593935412" are entered
-        Then the book is not added because name is taken
+        Then the book is not added because isbn is taken
 
     Scenario: user can create new bookmark for link
         Given command add link is selected
