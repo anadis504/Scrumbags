@@ -8,9 +8,12 @@ public interface Dao {
     boolean addLink(Link link);
     boolean removeBook(String isbn);
     boolean removeLink(String url);
+    boolean addPodcast(Podcast podcast);
     ArrayList<Book> getBooksByName(String name);
     ArrayList<Book> getBooksByAuthor(String author);
     Book getBookByIsbn(String isbn);
     ArrayList<Book> getBooksByYear(int year);
     ArrayList<Link> getLinksByName(String name);
+    
+    ArrayList<Podcast> getPodcastsByName(String name);
 }

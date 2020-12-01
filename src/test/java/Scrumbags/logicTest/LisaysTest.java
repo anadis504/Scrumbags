@@ -49,7 +49,7 @@ public class LisaysTest {
     }
 
 
-    /* @Test
+    @Test
     public void nameSearchFailsIfBookNotAddedYet() {
         assertNull(this.service.getBooksByName("XYZ"));
     }
@@ -59,8 +59,7 @@ public class LisaysTest {
         this.service.addBook("ABC", "Taavi", "123-14", 50, 2005);
         this.service.addBook("nimi", "kirjailija", "isbn1234", 123, 123);
         assertNull(this.service.getBooksByName("XYZ"));
-    } */
-    
+    } 
 //    @Test
 //    public void bookmarkAmountIsRight() {
 //        this.service.addBook("Aapinen", "Tuntematon");

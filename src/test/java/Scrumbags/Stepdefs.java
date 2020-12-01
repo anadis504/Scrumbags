@@ -53,7 +53,7 @@ public class Stepdefs {
 
     @Given("command search is selected")
     public void commandSearchIsSelected() {
-        input.add("3");
+        input.add("4");
     }
 
     @Given("command search book by isbn is selected")
@@ -119,6 +119,58 @@ public class Stepdefs {
     @When("a valid year {string} is entered")
     public void validYearIsEntered(String year) {
         input.add(year);
+        input.add("q");
+
+        io = new StubIO(input);
+        ui = new Ui(io, service);
+        ui.run(true);
+    }
+    
+    @Given("command search book by author is selected")
+    public void commandSearchBookByAuthorIsSelected() {
+        input.add("1");
+        input.add("1");
+    }
+    
+    @When("a valid author {string} is entered")
+    public void validAuthorIsEntered(String author) {
+        input.add(author);
+        input.add("q");
+
+        io = new StubIO(input);
+        ui = new Ui(io, service);
+        ui.run(true);
+    }
+    
+    @When("an invalid author {string} is entered")
+    public void invalidAuthorIsEntered(String author) {
+        input.add(author);
+        input.add("q");
+
+        io = new StubIO(input);
+        ui = new Ui(io, service);
+        ui.run(true);
+    }
+    
+    @Given("command search book by name is selected")
+    public void commandSearchBookByNameIsSelected() {
+        input.add("1");
+        input.add("2");
+    }
+    
+    @When("a valid name {string} is entered")
+    public void validNameIsEntered(String name) {
+        input.add(name);
+        input.add("q");
+
+        io = new StubIO(input);
+        ui = new Ui(io, service);
+        ui.run(true);
+    }
+    
+    @When("an invalid name {string} is entered")
+    public void invalidNameIsEntered(String name) {
+        input.add(name);
         input.add("q");
 
         io = new StubIO(input);

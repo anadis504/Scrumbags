@@ -2,6 +2,7 @@ package Scrumbags.database;
 
 import Scrumbags.logic.Book;
 import Scrumbags.logic.Link;
+import Scrumbags.logic.Podcast;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +25,7 @@ public class Database implements Dao {
             Statement s = conn.createStatement();
             s.execute(ctinx + "Books (name TEXT, author TEXT, year INTEGER, pages INTEGER, isbn TEXT);");
             s.execute(ctinx + "Links (name TEXT, address TEXT UNIQUE);");
+            s.execute(ctinx + "podcasts (name TEXT UNIQUE, publisher TEXT, url TEXT, rrs TEXT);");
             s.close();
         } catch (SQLException ex) {
             System.out.println("Virhe luotaessa tietokantatauluja. Yritä käynnistää ohjelma uudestaan.");
@@ -66,6 +68,30 @@ public class Database implements Dao {
 
             stmt.setString(1, name);
             stmt.setString(2, address);
+
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException ex) {
+            return false;
+        }
+
+        return true;
+    }
+    
+    @Override
+    public boolean addPodcast(Podcast podcast) {
+        String name = podcast.getName();
+        String publisher = podcast.getPublisher();
+        String url = podcast.getUrl();
+        String rrs = podcast.getRrs();
+
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Podcasts(name, publisher, url, rrs) VALUES (?, ?, ?, ?)");
+
+            stmt.setString(1, name);
+            stmt.setString(2, publisher);
+            stmt.setString(3, url);
+            stmt.setString(4, rrs);
 
             stmt.executeUpdate();
             stmt.close();
@@ -209,6 +235,27 @@ public class Database implements Dao {
                 return null;
             }
             return booklist;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
+    @Override
+    public ArrayList<Podcast> getPodcastsByName(String name) {
+        ArrayList<Podcast> podcastlist = new ArrayList<>();
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Podcasts WHERE name=?");
+            stmt.setString(1, name);
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                Podcast podcast = new Podcast(res.getString("name"), res.getString("publisher"), res.getString("url"), res.getString("rrs"));
+                podcastlist.add(podcast);
+            }
+            stmt.close();
+            if (podcastlist.isEmpty()) {
+                return null;
+            }
+            return podcastlist;
         } catch (SQLException ex) {
             return null;
         }

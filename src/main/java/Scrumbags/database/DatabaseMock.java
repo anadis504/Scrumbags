@@ -2,16 +2,19 @@ package Scrumbags.database;
 
 import Scrumbags.logic.Book;
 import Scrumbags.logic.Link;
+import Scrumbags.logic.Podcast;
 import java.util.ArrayList;
 
 public class DatabaseMock implements Dao {
 
     private ArrayList<Book> books;
     private ArrayList<Link> links;
+    private ArrayList<Podcast> podcasts;
 
     public DatabaseMock() {
         this.books = new ArrayList<>();
         this.links = new ArrayList<>();
+        this.podcasts = new ArrayList<>();
     }
    
     @Override
@@ -76,6 +79,9 @@ public class DatabaseMock implements Dao {
                 booklist.add(b);
             }
         }
+        if (booklist.isEmpty()){
+            return null;
+        }
         return booklist;
     }
 
@@ -101,5 +107,25 @@ public class DatabaseMock implements Dao {
             return null;
         }
         return booklist;
+    }
+
+    @Override
+    public boolean addPodcast(Podcast podcast) {
+        podcasts.add(podcast);
+        return true;
+    }
+
+    @Override
+    public ArrayList<Podcast> getPodcastsByName(String name) {
+        ArrayList<Podcast> podcastlist = new ArrayList<>();
+        for (Podcast p: this.podcasts) {
+            if (p.getName().equals(name)) {
+                podcastlist.add(p);
+            }
+        }
+        if (podcastlist.isEmpty()) {
+            return null;
+        }
+        return podcastlist;
     }
 }
