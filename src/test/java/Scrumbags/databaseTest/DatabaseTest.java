@@ -92,12 +92,6 @@ public class DatabaseTest {
     public void bookCannotBeFoundByISBNBeforeItIsAdded() {
         assertEquals(null, db.getBookByIsbn("978-951-1-36427-6"));
     }
-    
-    /* Obsolete test, validation done on service-level
-    @Test
-    public void addingExistingBookWithSameISBNReturnsFalse() {
-        assertFalse(db.addBook(joulupukinLomakirja));
-    }*/
 
     @Test
     public void addingExistingBookWithoutISBNReturnsTrue() {
@@ -121,9 +115,37 @@ public class DatabaseTest {
             assertFalse(results.contains(pizze));
         }
     }
-    
+
     @Test
     public void nonExistingLinkCannotBeFoundByName() {
         assertEquals(null, db.getLinksByName(ohtu.getName()));
+    }
+
+    @Test
+    public void afterDeletingExistingBookItCannotBeFoundByName() {
+        //Waiting for implementation
+        //db.deleteBook(testBook);
+        //assertNull(db.getBooksByName(testBook));
+    }
+
+    @Test
+    public void afterDeletingExistingBookItCannotBeFoundByWriter() {
+        //Waiting for implementation
+        //db.deleteBook(testBook);
+        //assertNull(db.getBooksWriter(testBook));
+    }
+
+    @Test
+    public void afterDeletingExistingBookItCannotBeFoundByISBN() {
+        //Waiting for implementation
+        //db.deleteBook(testBook);
+        //assertNull(db.getBookISBN(testBook));
+    }
+
+    @Test
+    public void afterDeletingExistingLinkItCannotBeFoundByName() {
+        //Waiting for implementation
+        //db.deleteLink(Link);
+        //assertNull(db.getLink(testLink);
     }
 }
