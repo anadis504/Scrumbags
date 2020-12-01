@@ -11,6 +11,15 @@ Lukuvinkkikirjasto<br>
 
 ## Käyttöohjeet
 
+Käy lataamassa uusin [release](https://github.com/Latelaukki/Scrumbags/releases/tag/sprint2) ja käynnistä se komentoriviltä
+
+```
+java -jar Scrumbags_v2.jar
+```
+
+
+Voit myös tehdä jar-tiedoston itse:
+
 * Lataa projekti koneellesi ja mene kansioon Scrumbags
 * Luo shadow jar-tiedosto komennolla
 
