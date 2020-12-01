@@ -59,7 +59,7 @@ public class Database implements Dao {
     @Override
     public boolean addLink(Link link) {
         String name = link.getName();
-        String address = link.getAdress();
+        String address = link.getAddress();
 
         try (Connection conn = this.ldb.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Links (name, address) VALUES (?, ?)");
