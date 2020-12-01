@@ -25,6 +25,26 @@ public class DatabaseMock implements Dao {
         this.links.add(link);
         return true;
     }
+    
+    @Override
+    public boolean removeBook(String isbn) {
+        for (Book b: this.books) {
+            if (b.getIsbn().equals(isbn)) {
+                books.remove(b);
+            }
+        }
+        return true;
+    }
+    
+    @Override
+    public boolean removeLink(String url) {
+        for (Link l: this.links) {
+            if (l.getAddress().equals(url)) {
+                links.remove(l);
+            }
+        }
+        return true;
+    }
 
     @Override
     public ArrayList<Book> getBooksByAuthor(String author) {

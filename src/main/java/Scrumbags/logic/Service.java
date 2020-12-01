@@ -48,6 +48,31 @@ public class Service {
         return null;
     }
     
+    public boolean removeBook(ArrayList<Book> booklist, String id) {
+        String isbn = "";
+        int i = 1;
+        for (Book b: booklist) {
+            if (i == Integer.parseInt(id)) {
+                isbn = b.getIsbn();
+                i++;
+            }
+        }
+        return this.database.removeBook(isbn);
+    }
+    
+    public boolean removeLink(ArrayList<Link> linklist, String id) {
+        String url = "";
+        int i = 1;
+        for (Link l: linklist) {
+            if (i == Integer.parseInt(id)) {
+                url = l.address;
+                i++;
+            }
+        }
+        System.out.println("url: " + url);
+        return this.database.removeLink(url);
+    }
+    
     public ArrayList<Book> getBooksByAuthor(String author) {
         return this.database.getBooksByAuthor(author);
     }

@@ -77,6 +77,34 @@ public class Database implements Dao {
     }
 
     @Override
+    public boolean removeBook(String isbn) {
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Books WHERE isbn=?");
+            stmt.setString(1, isbn);
+            
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException ex) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public boolean removeLink(String url) {
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Links WHERE address=?");
+            stmt.setString(1, url);
+            
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException ex) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public ArrayList<Book> getBooksByAuthor(String author) {
         ArrayList<Book> booklist = new ArrayList<>();
 

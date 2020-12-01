@@ -45,7 +45,7 @@ public class Ui {
                     + "q) Poistu ohjelmasta\n"
                     + "1) Lisää kirja\n"
                     + "2) Lisää linkki\n"
-                    + "3) Hae\n\n"
+                    + "3) Hae tai poista\n"
                     + "Anna komennon numero:");
             komento = io.nextLine();
             /**
@@ -59,7 +59,9 @@ public class Ui {
                 addLink();
             } else if (komento.equals("3")) {
                 search();
-            }
+            } /*else if (komento.equals("4")) {
+                remove();
+            }*/
         }
     }
 
@@ -73,7 +75,7 @@ public class Ui {
         } else if (komento.equals("2")) {
             searchLink();
         } //virheellinen komento
-    }
+    } 
 
     private void searchBook() {
         io.print("Valitse hakuperuste:");
@@ -91,12 +93,26 @@ public class Ui {
         String search = io.nextLine();
         ArrayList<Book> booklist = this.service.getBooks(search, komento);
         if (booklist != null) {
+            int i = 1;
             for (Book b : booklist) {
-                io.print(b.toString());
+                io.print("nro: " + i + ". " + b.toString() + "\n");
+                i++;
+            }
+            io.print("Haluatko poistaa jonkun kirjoista: [k/e]");
+            komento = io.nextLine();
+        
+            if (komento.equals("k")) {
+                removeBook(booklist);
             }
         } else {
             io.print("Ei tuloksia.");
         }
+    }
+    
+    private void removeBook(ArrayList<Book> booklist) {
+        io.print("Anna kirjan nro, jonka haluat poistaa");
+        komento = io.nextLine();
+        this.service.removeBook(booklist, komento);
     }
 
     private void searchLink() {
@@ -104,12 +120,26 @@ public class Ui {
         String name = io.nextLine();
         ArrayList<Link> linklist = this.service.getLinksByName(name);
         if (linklist != null) {
+            int i = 1;
             for (Link l : linklist) {
-                io.print(l.toString());
+                io.print("nro: " + i + ". " + l.toString() + "\n");
+                i++;
+            }
+            io.print("Haluatko poistaa jonkun linkeistä: [k/e]");
+            komento = io.nextLine();
+        
+            if (komento.equals("k")) {
+                removeLink(linklist);
             }
         } else {
             io.print("Ei tuloksia.");
         }
+    }
+    
+    private void removeLink(ArrayList<Link> linklist) {
+        io.print("Anna linkin nro, jonka haluat poistaa");
+        komento = io.nextLine();
+        this.service.removeLink(linklist, komento);
     }
 
     private void addBook() {
