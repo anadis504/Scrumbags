@@ -11,3 +11,4 @@ build
 bin/
 library.db
 nbproject/
+.idea/

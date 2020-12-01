@@ -45,7 +45,8 @@ public class Ui {
                     + "q) Poistu ohjelmasta\n"
                     + "1) Lisää kirja\n"
                     + "2) Lisää linkki\n"
-                    + "3) Hae\n\n"
+                    + "3) Lisää podcast\n"
+                    + "4) Hae\n\n"
                     + "Anna komennon numero:");
             komento = io.nextLine();
             /**
@@ -58,6 +59,8 @@ public class Ui {
             } else if (komento.equals("2")) {
                 addLink();
             } else if (komento.equals("3")) {
+                addPodcast();
+            } else if (komento.equals("4")) {
                 search();
             }
         }
@@ -67,12 +70,15 @@ public class Ui {
         io.print("Haetaanko:");
         io.print("1) kirjaa");
         io.print("2) linkkiä?");
+        io.print("3) linkkiä?");
         komento = io.nextLine();
         if (komento.equals("1")) {
             searchBook();
         } else if (komento.equals("2")) {
             searchLink();
-        } //virheellinen komento
+        } else if (komento.equals("3")) {
+            searchPodcast();
+        } 
     }
 
     private void searchBook() {
@@ -110,6 +116,21 @@ public class Ui {
         } else {
             io.print("Ei tuloksia.");
         }
+    }
+    
+    private void searchPodcast() {
+        io.print("Minkä nimistä podcastia etsitään?");
+        String name = io.nextLine();
+        /*
+        ArrayList<Link> podcastlist = this.service.getPodcastsByName(name);
+        if (podcastlist != null) {
+            for (Link l : podcastlist) {
+                io.print(l.toString());
+            }
+        } else {
+            io.print("Ei tuloksia.");
+        }
+        */
     }
 
     private void addBook() {
@@ -150,10 +171,46 @@ public class Ui {
         }
     }
 
+    private void addPodcast() {
+        String nimi;
+        String julkaisija;
+        String url;
+        String rrs;
+
+        io.print("Anna podcastin nimi (pakollinen tieto).");
+        nimi = promptTextInput("Anna kirjan nimi (vähintään yhden merkin pituinen).", false);
+
+        io.print("Anna julkaisijan nimi (ohita syöttämällä \"q\").");
+        julkaisija = promptTextInput("Anna kirjailijan nimi tai ohita syöttämällä \"q\"", true);
+
+        io.print("Anna url (ohita syöttämällä \"q\").");
+        url = promptTextInput("Anna ISBN tai ohita syöttämällä \"q\"", true);
+
+        io.print("Anna kirjan RRS (ohita syöttämällä \"q\")");
+        rrs = promptTextInput("Anna sivumäärä tai ohita syöttämällä \"q\"", true);
+
+        io.print("LISÄTÄÄN KIRJA: \n"
+                + "NIMI: " + nimi + "\n"
+                + "julkaisija: " + julkaisija + "\n"
+                + "url: " + url + "\n"
+                + "rrs: " + rrs + "\n"
+                + "ONKO OK? [k/e]");
+        if (yesNo()) {
+            /*
+            if (service.addpodcast(nimi, julkaisija, url, rrs, julkaisuvuosi)) {
+                io.print("podcast lisätty onnistuneesti.");
+            } else {
+                io.print("Podcastia ei onnistuttu lisäämään.");
+            }
+             */
+        }
+
+    }
+
     private void addLink() {
         String nimi;
         String URL;
-        
+
         io.print("Anna Linkin nimi (pakollinen).");
         nimi = promptTextInput("Anna Linkin nimi (vähintään yhden merkin pituinen).", false);
 

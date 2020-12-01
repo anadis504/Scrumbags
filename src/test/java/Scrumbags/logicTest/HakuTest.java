@@ -4,22 +4,15 @@ import Scrumbags.logic.*;
 import Scrumbags.database.*;
 import java.util.ArrayList;
 
-import org.junit.*;
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 public class HakuTest {
     Service service;
     
     public HakuTest() {
-        this.service = new Service(new DatabaseFake());
+        this.service = new Service(new DatabaseMock());
     }
     
     @Test

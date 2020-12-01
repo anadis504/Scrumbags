@@ -4,20 +4,20 @@ import java.util.Objects;
 
 public class Link {
 
-    String adress;
+    String address;
     String name;
 
-    public Link(String name, String adress) {
-        this.adress = adress;
+    public Link(String name, String address) {
+        this.address = address;
         this.name = name;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getName() {
@@ -40,7 +40,7 @@ public class Link {
             return false;
         }
         final Link other = (Link) obj;
-        if (!Objects.equals(this.adress, other.adress)) {
+        if (!Objects.equals(this.address, other.address)) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
@@ -51,6 +51,6 @@ public class Link {
 
     @Override
     public String toString() {
-        return "\nNimi: "+getName()+"\nURL: "+getAdress();
+        return "\nNimi: "+getName()+"\nURL: "+ getAddress();
     }
 }

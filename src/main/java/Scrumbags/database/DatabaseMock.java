@@ -4,12 +4,12 @@ import Scrumbags.logic.Book;
 import Scrumbags.logic.Link;
 import java.util.ArrayList;
 
-public class DatabaseFake implements Dao {
+public class DatabaseMock implements Dao {
 
     private ArrayList<Book> books;
     private ArrayList<Link> links;
 
-    public DatabaseFake() {
+    public DatabaseMock() {
         this.books = new ArrayList<>();
         this.links = new ArrayList<>();
     }
