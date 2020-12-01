@@ -34,6 +34,11 @@ public class Service {
         Link link = new Link(name, adress);
         return this.database.addLink(link);
     }
+    
+    public boolean addPodcast(String name, String publisher, String url, String rrs) {
+        Podcast podcast = new Podcast(name, publisher, url, rrs);
+        return this.database.addPodcast(podcast);
+    }
 
     public ArrayList<Book> getBooks(String search, String by) {
         if (by.equals("1")) {
@@ -74,6 +79,10 @@ public class Service {
             return result;
         }
         return null;
+    }
+    
+    public ArrayList<Podcast> getPodcastsByName(String name) {
+        return database.getPodcastsByName(name);
     }
     
     public boolean bookIsbnExists(String isbn) {
