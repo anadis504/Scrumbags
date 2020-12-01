@@ -45,12 +45,8 @@ public class Ui {
                     + "q) Poistu ohjelmasta\n"
                     + "1) Lisää kirja\n"
                     + "2) Lisää linkki\n"
-<<<<<<< HEAD
-                    + "3) Hae tai poista\n"
-=======
                     + "3) Lisää podcast\n"
                     + "4) Hae\n\n"
->>>>>>> a6d79efbd822f9d94e04cee9b60b7e6957c69446
                     + "Anna komennon numero:");
             komento = io.nextLine();
             /**
