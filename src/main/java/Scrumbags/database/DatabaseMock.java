@@ -59,6 +59,9 @@ public class DatabaseMock implements Dao {
                 booklist.add(b);
             }
         }
+        if (booklist.isEmpty()){
+            return null;
+        }
         return booklist;
     }
 
@@ -96,7 +99,7 @@ public class DatabaseMock implements Dao {
     public ArrayList<Podcast> getPodcastsByName(String name) {
         ArrayList<Podcast> podcastlist = new ArrayList<>();
         for (Podcast p: this.podcasts) {
-            if (p.getName() == name) {
+            if (p.getName().equals(name)) {
                 podcastlist.add(p);
             }
         }
