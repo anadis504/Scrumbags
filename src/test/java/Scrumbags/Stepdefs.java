@@ -152,7 +152,7 @@ public class Stepdefs {
         ui.run(true);
     }
     
-     @Given("command search book by name is selected")
+    @Given("command search book by name is selected")
     public void commandSearchBookByNameIsSelected() {
         input.add("1");
         input.add("2");
