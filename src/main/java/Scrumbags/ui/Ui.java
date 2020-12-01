@@ -70,7 +70,7 @@ public class Ui {
         io.print("Haetaanko:");
         io.print("1) kirjaa");
         io.print("2) linkkiä?");
-        io.print("3) linkkiä?");
+        io.print("3) podcastia?");
         komento = io.nextLine();
         if (komento.equals("1")) {
             searchBook();
@@ -78,7 +78,7 @@ public class Ui {
             searchLink();
         } else if (komento.equals("3")) {
             searchPodcast();
-        } 
+        }
     }
 
     private void searchBook() {
@@ -117,20 +117,20 @@ public class Ui {
             io.print("Ei tuloksia.");
         }
     }
-    
+
     private void searchPodcast() {
         io.print("Minkä nimistä podcastia etsitään?");
         String name = io.nextLine();
-        /*
-        ArrayList<Link> podcastlist = this.service.getPodcastsByName(name);
+
+        ArrayList<Podcast> podcastlist = this.service.getPodcastsByName(name);
         if (podcastlist != null) {
-            for (Link l : podcastlist) {
-                io.print(l.toString());
+            for (Podcast p : podcastlist) {
+                io.print(p.toString());
             }
         } else {
             io.print("Ei tuloksia.");
         }
-        */
+
     }
 
     private void addBook() {
@@ -196,13 +196,13 @@ public class Ui {
                 + "rrs: " + rrs + "\n"
                 + "ONKO OK? [k/e]");
         if (yesNo()) {
-            /*
-            if (service.addpodcast(nimi, julkaisija, url, rrs, julkaisuvuosi)) {
+
+            if (service.addPodcast(nimi, julkaisija, url, rrs)) {
                 io.print("podcast lisätty onnistuneesti.");
             } else {
                 io.print("Podcastia ei onnistuttu lisäämään.");
             }
-             */
+
         }
 
     }
