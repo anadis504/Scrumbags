@@ -33,7 +33,7 @@ public class StubIO implements IO {
         if (index < input.size()) {
             return input.get(index++);
         }
-        return "";
+        return "q";
     }
 
     @Override

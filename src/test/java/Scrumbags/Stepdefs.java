@@ -65,11 +65,12 @@ public class Stepdefs {
     @When("a valid isbn {string} is entered")
     public void validIsbnIsEntered(String isbn) {
         input.add(isbn);
-        input.add("q");
+    }
 
-        io = new StubIO(input);
-        ui = new Ui(io, service);
-        ui.run(true);
+    @When("user chooses not to remove any of the found bookmarks")
+    public void foundBookmarksNotRemoved() {
+        input.add("e");
+        runUi();
     }
 
     // Tämän testin voisi muotoilla paremmin .feature -tiedostoon että missä
@@ -88,11 +89,8 @@ public class Stepdefs {
     @When("an invalid isbn {string} is entered")
     public void inValidIsbnIsEntered(String isbn) {
         input.add(isbn);
-        input.add("q");
 
-        io = new StubIO(input);
-        ui = new Ui(io, service);
-        ui.run(true);
+        runUi();
     }
 
     @Then("search has no results")
@@ -109,73 +107,49 @@ public class Stepdefs {
     @When("a non-existing year {string} is entered")
     public void nonExistingYearIsEntered(String year) {
         input.add(year);
-        input.add("q");
 
-        io = new StubIO(input);
-        ui = new Ui(io, service);
-        ui.run(true);
+        runUi();
     }
 
     @When("a valid year {string} is entered")
     public void validYearIsEntered(String year) {
         input.add(year);
-        input.add("q");
-
-        io = new StubIO(input);
-        ui = new Ui(io, service);
-        ui.run(true);
     }
-    
+
     @Given("command search book by author is selected")
     public void commandSearchBookByAuthorIsSelected() {
         input.add("1");
         input.add("1");
     }
-    
+
     @When("a valid author {string} is entered")
     public void validAuthorIsEntered(String author) {
         input.add(author);
-        input.add("q");
-
-        io = new StubIO(input);
-        ui = new Ui(io, service);
-        ui.run(true);
     }
-    
+
     @When("an invalid author {string} is entered")
     public void invalidAuthorIsEntered(String author) {
         input.add(author);
-        input.add("q");
 
-        io = new StubIO(input);
-        ui = new Ui(io, service);
-        ui.run(true);
+        runUi();
     }
-    
+
     @Given("command search book by name is selected")
     public void commandSearchBookByNameIsSelected() {
         input.add("1");
         input.add("2");
     }
-    
+
     @When("a valid name {string} is entered")
     public void validNameIsEntered(String name) {
         input.add(name);
-        input.add("q");
-
-        io = new StubIO(input);
-        ui = new Ui(io, service);
-        ui.run(true);
     }
-    
+
     @When("an invalid name {string} is entered")
     public void invalidNameIsEntered(String name) {
         input.add(name);
-        input.add("q");
 
-        io = new StubIO(input);
-        ui = new Ui(io, service);
-        ui.run(true);
+        runUi();
     }
 
     @Given("command add book is selected")
@@ -191,11 +165,8 @@ public class Stepdefs {
         input.add(pages);
         input.add(year);
         input.add("k");
-        input.add("q");
 
-        io = new StubIO(input);
-        ui = new Ui(io, service);
-        ui.run(true);
+        runUi();
     }
 
     @Then("new bookmark for a book is created")
@@ -211,11 +182,8 @@ public class Stepdefs {
         input.add("q");
         input.add("q");
         input.add("k");
-        input.add("q");
 
-        io = new StubIO(input);
-        ui = new Ui(io, service);
-        ui.run(true);
+        runUi();
     }
 
     @Then("the book is not added because name is taken")
@@ -231,11 +199,8 @@ public class Stepdefs {
         input.add("q");
         input.add("q");
         input.add("k");
-        input.add("q");
 
-        io = new StubIO(input);
-        ui = new Ui(io, service);
-        ui.run(true);
+        runUi();
     }
 
     @Then("the book is not added because isbn is taken")
@@ -253,15 +218,18 @@ public class Stepdefs {
         input.add(name);
         input.add(url);
         input.add("k");
-        input.add("q");
 
-        io = new StubIO(input);
-        ui = new Ui(io, service);
-        ui.run(true);
+        runUi();
     }
 
     @Then("new bookmark for a link is created")
     public void bookmarkForLinkCreated() {
         assertTrue(io.getOutput().contains("Linkki lisätty onnistuneesti."));
+    }
+
+    private void runUi() {
+        io = new StubIO(input);
+        ui = new Ui(io, service);
+        ui.run(true);
     }
 }
