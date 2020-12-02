@@ -120,32 +120,38 @@ public class DatabaseTest {
     public void nonExistingLinkCannotBeFoundByName() {
         assertEquals(null, db.getLinksByName(ohtu.getName()));
     }
-
+    
     @Test
-    public void afterDeletingExistingBookItCannotBeFoundByName() {
-        //Waiting for implementation
-        //db.deleteBook(testBook);
-        //assertNull(db.getBooksByName(testBook));
+    public void removingExistingBookReturnsTrue() {
+        assertTrue(db.removeBook(joulupukinLomakirja.getIsbn()));
+    }
+    
+    @Test
+    public void removingExistingLinkReturnsTrue() {
+        assertTrue(db.removeLink(tira.getAddress()));
     }
 
     @Test
-    public void afterDeletingExistingBookItCannotBeFoundByWriter() {
-        //Waiting for implementation
-        //db.deleteBook(testBook);
-        //assertNull(db.getBooksWriter(testBook));
+    public void afterDeletingExistingBookItCannotBeFoundByName() {
+        db.removeBook(joulupukinLomakirja.getIsbn());
+        assertNull(db.getBooksByName(joulupukinLomakirja.getName()));
+    }
+
+    @Test
+    public void afterDeletingExistingBookItCannotBeFoundByAuthor() {
+        db.removeBook(joulupukinLomakirja.getIsbn());
+        assertNull(db.getBooksByAuthor(joulupukinLomakirja.getAuthor()));
     }
 
     @Test
     public void afterDeletingExistingBookItCannotBeFoundByISBN() {
-        //Waiting for implementation
-        //db.deleteBook(testBook);
-        //assertNull(db.getBookISBN(testBook));
+        db.removeBook(joulupukinLomakirja.getIsbn());
+        assertNull(db.getBookByIsbn(joulupukinLomakirja.getIsbn()));
     }
 
     @Test
     public void afterDeletingExistingLinkItCannotBeFoundByName() {
-        //Waiting for implementation
-        //db.deleteLink(Link);
-        //assertNull(db.getLink(testLink);
+        db.removeLink(tira.getAddress());
+        assertNull(db.getLinksByName(tira.getName()));
     }
 }
