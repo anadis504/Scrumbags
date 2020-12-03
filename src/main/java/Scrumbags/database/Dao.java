@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public interface Dao {
     boolean addBook(Book book);
     boolean addLink(Link link);
-    boolean removeBook(String isbn);
+    boolean removeBook(String isbn, String name);
     boolean removeLink(String url);
     boolean addPodcast(Podcast podcast);
     ArrayList<Book> getBooksByName(String name);

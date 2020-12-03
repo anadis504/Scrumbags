@@ -123,7 +123,7 @@ public class DatabaseTest {
     
     @Test
     public void removingExistingBookReturnsTrue() {
-        assertTrue(db.removeBook(joulupukinLomakirja.getIsbn()));
+        assertTrue(db.removeBook(joulupukinLomakirja.getIsbn(), joulupukinLomakirja.getName()));
     }
     
     @Test
@@ -133,19 +133,19 @@ public class DatabaseTest {
 
     @Test
     public void afterDeletingExistingBookItCannotBeFoundByName() {
-        db.removeBook(joulupukinLomakirja.getIsbn());
+        db.removeBook(joulupukinLomakirja.getIsbn(), joulupukinLomakirja.getName());
         assertNull(db.getBooksByName(joulupukinLomakirja.getName()));
     }
 
     @Test
     public void afterDeletingExistingBookItCannotBeFoundByAuthor() {
-        db.removeBook(joulupukinLomakirja.getIsbn());
+        db.removeBook(joulupukinLomakirja.getIsbn(), joulupukinLomakirja.getName());
         assertNull(db.getBooksByAuthor(joulupukinLomakirja.getAuthor()));
     }
 
     @Test
     public void afterDeletingExistingBookItCannotBeFoundByISBN() {
-        db.removeBook(joulupukinLomakirja.getIsbn());
+        db.removeBook(joulupukinLomakirja.getIsbn(), joulupukinLomakirja.getName());
         assertNull(db.getBookByIsbn(joulupukinLomakirja.getIsbn()));
     }
 
