@@ -205,7 +205,7 @@ public class Stepdefs {
 
     @Then("the book is not added because isbn is taken")
     public void theBookIsNotAddedBecauseIsbnIsTaken() {
-        assertTrue(io.getOutput().contains("Kirjaa ei onnistuttu lisäämään."));
+        assertTrue(io.getOutput().contains("Kirjan lisääminen ei onnistunut."));
     }
 
     @Given("command add link is selected")

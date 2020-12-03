@@ -26,16 +26,33 @@ public class Service {
     
     public boolean addBook(String name, String author, String isbn, int pages, int  year) {
         Book book = new Book(name, author, isbn, pages, year);
-        if (bookIsbnExists(isbn)) return false;
+        if (bookIsbnExists(isbn)) {
+            System.out.println("Virhe: ISBN-koodi on jo käytössä.");
+            return false;
+        }
         return this.database.addBook(book);
     }
     
-    public boolean addLink(String name, String adress) {
-        Link link = new Link(name, adress);
+    public boolean addLink(String name, String address) {
+        ArrayList<Link> checkLinks = database.getAllLinks();
+        
+        if (checkLinks != null) {
+            if (checkLinks.stream().anyMatch(l -> l.getAddress().equals(address))) {
+                System.out.println("Virhe: URL-osoite on jo käytössä.");
+                return false;
+            }
+        }
+        
+        Link link = new Link(name, address);
         return this.database.addLink(link);
     }
     
     public boolean addPodcast(String name, String publisher, String url, String rrs) {
+        if (getPodcastsByName(name) != null) {
+            System.out.println("Virhe: Podcastin nimi on jo käytössä.");
+            return false;
+        }
+        
         Podcast podcast = new Podcast(name, publisher, url, rrs);
         return this.database.addPodcast(podcast);
     }

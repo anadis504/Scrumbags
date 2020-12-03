@@ -196,7 +196,7 @@ public class Ui {
             if (service.addBook(nimi, kirjailija, ISBN, sivumaara, julkaisuvuosi)) {
                 io.print("Kirja lisätty onnistuneesti.");
             } else {
-                io.print("Kirjaa ei onnistuttu lisäämään.");
+                io.print("Kirjan lisääminen ei onnistunut.");
             }
         }
     }
@@ -216,7 +216,7 @@ public class Ui {
         io.print("Anna url (ohita syöttämällä \"q\").");
         url = promptTextInput("Anna ISBN tai ohita syöttämällä \"q\"", true);
 
-        io.print("Anna kirjan RRS (ohita syöttämällä \"q\")");
+        io.print("Anna podcastin RRS (ohita syöttämällä \"q\")");
         rrs = promptTextInput("Anna sivumäärä tai ohita syöttämällä \"q\"", true);
 
         io.print("LISÄTÄÄN KIRJA: \n"
@@ -230,11 +230,9 @@ public class Ui {
             if (service.addPodcast(nimi, julkaisija, url, rrs)) {
                 io.print("podcast lisätty onnistuneesti.");
             } else {
-                io.print("Podcastia ei onnistuttu lisäämään.");
+                io.print("Podcastin lisääminen ei onnistunut.");
             }
-
         }
-
     }
 
     private void addLink() {
@@ -255,7 +253,7 @@ public class Ui {
             if (service.addLink(nimi, URL)) {
                 io.print("Linkki lisätty onnistuneesti.");
             } else {
-                io.print("Linkkiä ei onnistuttu lisäämään.");
+                io.print("Linkin lisääminen ei onnistunut.");
             }
         }
     }

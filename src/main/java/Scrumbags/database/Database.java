@@ -52,6 +52,7 @@ public class Database implements Dao {
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException ex) {
+            System.out.println("Virhe tietokannan käsittelyssä: " + ex.toString());
             return false;
         }
 
@@ -72,6 +73,7 @@ public class Database implements Dao {
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException ex) {
+            System.out.println("Virhe tietokannan käsittelyssä: " + ex.getErrorCode());
             return false;
         }
 
@@ -96,6 +98,7 @@ public class Database implements Dao {
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException ex) {
+            System.out.println("Virhe tietokannan käsittelyssä: " + ex.toString());
             return false;
         }
 
@@ -111,6 +114,7 @@ public class Database implements Dao {
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException ex) {
+            System.out.println("Virhe tietokannan käsittelyssä: " + ex.toString());
             return false;
         }
         return true;
@@ -125,6 +129,7 @@ public class Database implements Dao {
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException ex) {
+            System.out.println("Virhe tietokannan käsittelyssä: " + ex.toString());
             return false;
         }
         return true;
@@ -174,7 +179,28 @@ public class Database implements Dao {
         } catch (SQLException e) {
             return null;
         }
+    }
+    
+    @Override
+    public ArrayList<Link> getAllLinks() {
+        ArrayList<Link> linklist = new ArrayList<>();
 
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Links");
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()) {
+                Link link = new Link(res.getString("name"), res.getString("address"));
+                linklist.add(link);
+            }
+            stmt.close();
+            if (linklist.isEmpty()) {
+                return null;
+            }
+            return linklist;
+        } catch (SQLException e) {
+            return null;
+        }
     }
 
     @Override
