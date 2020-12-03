@@ -106,10 +106,11 @@ public class Database implements Dao {
     }
 
     @Override
-    public boolean removeBook(String isbn) {
+    public boolean removeBook(String isbn, String name) {
         try (Connection conn = this.ldb.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Books WHERE isbn=?");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Books WHERE isbn=? AND name=?");
             stmt.setString(1, isbn);
+            stmt.setString(2, name);
             
             stmt.executeUpdate();
             stmt.close();

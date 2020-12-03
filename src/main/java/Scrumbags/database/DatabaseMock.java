@@ -30,9 +30,9 @@ public class DatabaseMock implements Dao {
     }
     
     @Override
-    public boolean removeBook(String isbn) {
+    public boolean removeBook(String isbn, String name) {
         for (Book b: this.books) {
-            if (b.getIsbn().equals(isbn)) {
+            if (b.getIsbn().equals(isbn) && b.getName().equals(name)) {
                 books.remove(b);
             }
         }

@@ -72,14 +72,16 @@ public class Service {
     
     public boolean removeBook(ArrayList<Book> booklist, String id) {
         String isbn = "";
+        String name = "";
         int i = 1;
         for (Book b: booklist) {
             if (i == Integer.parseInt(id)) {
                 isbn = b.getIsbn();
-                i++;
+                name = b.getName();
             }
+            i++;
         }
-        return this.database.removeBook(isbn);
+        return this.database.removeBook(isbn, name);
     }
     
     public boolean removeLink(ArrayList<Link> linklist, String id) {
