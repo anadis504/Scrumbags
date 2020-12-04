@@ -227,6 +227,49 @@ public class Stepdefs {
         assertTrue(io.getOutput().contains("Linkki lisätty onnistuneesti."));
     }
 
+    @Given("command add podcast is selected")
+    public void commandAddPodcastSelected() {
+        input.add("3");
+    }
+
+    @When("valid link name {string}, publisher {string}, url {string} and rrs {string} are entered and input is confirmed")
+    public void validLinkNamePublisherUrlAndRrsAreEnteredAndInputIsConfirmed(String name, String publisher, String url, String rrs) {
+        input.add(name);
+        input.add(publisher);
+        input.add(url);
+        input.add(rrs);
+        input.add("k");
+
+        runUi();
+    }
+
+    @Then("new bookmark for a podcast is created")
+    public void bookmarkForPodcastCreated() {
+        assertTrue(io.getOutput().contains("podcast lisätty onnistuneesti."));
+    }
+
+    @When("valid link name {string}, publisher {string}, url {string} and rrs {string} are entered twice and input is confirmed")
+public void validLinkNamePublisherUrlAndRrsAreEnteredTwiceAndInputIsConfirmed(String name, String publisher, String url, String rrs) {
+        input.add(name);
+        input.add(publisher);
+        input.add(url);
+        input.add(rrs);
+        input.add("k");
+        input.add("3");
+        input.add(name);
+        input.add(publisher);
+        input.add(url);
+        input.add(rrs);
+        input.add("k");
+
+        runUi();
+    }
+
+    @Then("cannot add another podcast with same name")
+    public void cannotAddAnotherPodcastWithSameName() {
+        assertTrue(io.getOutput().contains("Podcastin lisääminen ei onnistunut."));
+    }
+
     private void runUi() {
         io = new StubIO(input);
         ui = new Ui(io, service);
