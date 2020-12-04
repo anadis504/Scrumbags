@@ -1,1 +1,0 @@
-Feature: User can remove items
