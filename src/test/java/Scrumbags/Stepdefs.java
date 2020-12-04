@@ -234,6 +234,15 @@ public class Stepdefs {
 
         runUi();
     }
+    
+    @When("valid link name {string} and already taken url {string} are entered and input is confirmed")
+    public void validLinkNameAndTakenUrlAreEntered(String name, String url) {
+        input.add(name);
+        input.add(url);
+        input.add("k");
+
+        runUi();
+    }
 
     @Then("new bookmark for a link is created")
     public void bookmarkForLinkCreated() {
@@ -368,6 +377,11 @@ public class Stepdefs {
         assertTrue(found);
     }
 
+    @Then ("new bookmark for a link is not created") 
+    public void linkIsNotCreated() {
+        assertTrue(io.getOutput().contains("Linkin lisääminen ei onnistunut."));
+    }
+    
     private void runUi() {
         io = new StubIO(input);
         ui = new Ui(io, service);
