@@ -291,7 +291,7 @@ public class Ui {
         io.print("Anna podcastin RRS (ohita syöttämällä \"q\")");
         rrs = promptTextInput("Anna sivumäärä tai ohita syöttämällä \"q\"", true);
 
-        io.print("LISÄTÄÄN KIRJA: \n"
+        io.print("LISÄTÄÄN PODCAST: \n"
                 + "NIMI: " + nimi + "\n"
                 + "julkaisija: " + julkaisija + "\n"
                 + "url: " + url + "\n"
