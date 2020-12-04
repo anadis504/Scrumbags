@@ -157,10 +157,22 @@ public class Ui {
             for (Podcast p : podcastlist) {
                 io.print(p.toString());
             }
+            io.print("Haluatko poistaa jonkun linkeistä: [k/e]");
+            komento = io.nextLine();
+            
+            if (komento.equals("k")) {
+                removePodcast(podcastlist);
+            }
         } else {
             io.print("Ei tuloksia.");
         }
 
+    }
+
+    private void removePodcast(ArrayList<Podcast> podlist) {
+        io.print("Anna podcastin nro, jonka haluat poistaa");
+        komento = io.nextLine();
+        this.service.removePodcast(podlist, komento);
     }
 
     private void addBook() {

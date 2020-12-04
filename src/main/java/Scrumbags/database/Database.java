@@ -106,6 +106,20 @@ public class Database implements Dao {
     }
 
     @Override
+    public boolean removePodcast(String name) {
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Podcasts WHERE name=?");
+            stmt.setString(1, name);
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException ex) {
+            System.out.println("Virhe tietokannan käsittelyssä: " + ex.toString());
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public boolean removeBook(String isbn, String name) {
         try (Connection conn = this.ldb.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Books WHERE isbn=? AND name=?");

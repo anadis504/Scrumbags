@@ -50,6 +50,16 @@ public class DatabaseMock implements Dao {
     }
 
     @Override
+    public boolean removePodcast(String name) {
+        for (Podcast p: this.podcasts) {
+            if (p.getName().equals(name)) {
+                links.remove(p);
+            }
+        }
+        return true;
+    }
+
+    @Override
     public ArrayList<Book> getBooksByAuthor(String author) {
         ArrayList<Book> booklist = new ArrayList<>();
         for (Book b: this.books) {
