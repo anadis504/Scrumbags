@@ -100,7 +100,6 @@ public class Service {
         return this.database.removeLink(url);
     }
 
-<<<<<<< HEAD
     public boolean removePodcast(ArrayList<Podcast> podlist, String id) {
         String name = "";
         int i = 1;
@@ -114,8 +113,6 @@ public class Service {
         return this.database.removePodcast(name);
     }
     
-=======
->>>>>>> 9d62fef7178e58f2749f304cf8b91903f8719551
     public ArrayList<Book> getBooksByAuthor(String author) {
         return this.database.getBooksByAuthor(author);
     }
