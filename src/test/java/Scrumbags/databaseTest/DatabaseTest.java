@@ -29,6 +29,8 @@ public class DatabaseTest {
     private Book joulupukinLomakirja = new Book("Joulupukin lomakirja", "Mauri Kunnas", "978-951-1-35993-7", 30, 2020);
     private Book kuinkaPuutKasvavat = new Book("Kuinka puut kasvavat", "Saku Tuominen", "978-951-1-36427-6", 123, 2021);
     private Book pizze = new Book("Pizze", "Saku Tuominen", "978-951-1-29097-1", 62, 2015);
+    private Book tirakirja = new Book("Tirakirja", "Antti Laaksonen", "---", -1, -1);
+    private Book scrumbook = new Book("Scrumbook", "---", "---", -1, -1);
 
     private Link tira = new Link("Tietorakenteet ja algoritmit", "https://tira-s19.mooc.fi/");
     private Link ohtu = new Link("Ohjelmistotuotanto", "https://ohjelmistotuotanto-hy.github.io/");
@@ -132,26 +134,46 @@ public class DatabaseTest {
     }
 
     @Test
-    public void afterDeletingExistingBookItCannotBeFoundByName() {
+    public void afterRemovingExistingBookItCannotBeFoundByName() {
         db.removeBook(joulupukinLomakirja.getIsbn(), joulupukinLomakirja.getName());
         assertNull(db.getBooksByName(joulupukinLomakirja.getName()));
     }
 
     @Test
-    public void afterDeletingExistingBookItCannotBeFoundByAuthor() {
+    public void afterRemovingExistingBookItCannotBeFoundByAuthor() {
         db.removeBook(joulupukinLomakirja.getIsbn(), joulupukinLomakirja.getName());
         assertNull(db.getBooksByAuthor(joulupukinLomakirja.getAuthor()));
     }
 
     @Test
-    public void afterDeletingExistingBookItCannotBeFoundByISBN() {
+    public void afterRemovingExistingBookItCannotBeFoundByISBN() {
         db.removeBook(joulupukinLomakirja.getIsbn(), joulupukinLomakirja.getName());
         assertNull(db.getBookByIsbn(joulupukinLomakirja.getIsbn()));
     }
 
     @Test
-    public void afterDeletingExistingLinkItCannotBeFoundByName() {
+    public void afterRemovingExistingLinkItCannotBeFoundByName() {
         db.removeLink(tira.getAddress());
         assertNull(db.getLinksByName(tira.getName()));
+    }
+    
+    @Test
+    public void afterAddingTwoBooksWithoutISBNThoseCanBeAddedAndFoundByName() {
+        db.addBook(tirakirja);
+        db.addBook(scrumbook);
+        
+        assertTrue(db.getBooksByName(tirakirja.getName()).contains(tirakirja));
+        assertTrue(db.getBooksByName(scrumbook.getName()).contains(scrumbook));
+    }
+    
+    @Test
+    public void afterAddingTwoBooksWithoutISBNAndRemovingOtherItCannotBeFoundByName() {
+        db.addBook(tirakirja);
+        db.addBook(scrumbook);
+        
+        db.removeBook(tirakirja.getIsbn(), tirakirja.getName());
+        
+        assertNull(db.getBooksByName(tirakirja.getName()));
+        assertTrue(db.getBooksByName(scrumbook.getName()).contains(scrumbook));
     }
 }
