@@ -60,12 +60,6 @@ public class LisaysTest {
         this.service.addBook("nimi", "kirjailija", "isbn1234", 123, 123);
         assertNull(this.service.getBooksByName("XYZ"));
     } 
-//    @Test
-//    public void bookmarkAmountIsRight() {
-//        this.service.addBook("Aapinen", "Tuntematon");
-//        this.service.addLink("Google", "http://www.google.com");
-//        this.service.addLink("Omasivu", "http://www.urpo.fi");
-//        assertEquals(this.service.getBookList().size()+this.service.getLinkList().size() == 3);
-//    }
+   
     
 }

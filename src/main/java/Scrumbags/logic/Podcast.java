@@ -11,7 +11,7 @@ public class Podcast {
     public Podcast(String name, String publisher, String url, String rrs){
         this.name = name;
         this.publisher = publisher;
-        this. url = url;
+        this.url = url;
         this.rrs = rrs;
     }
 
