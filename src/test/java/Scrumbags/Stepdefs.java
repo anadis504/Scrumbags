@@ -38,7 +38,9 @@ public class Stepdefs {
         input = new ArrayList<>();
         service = new Service(dao);
         Book bonanza = new Book("Bonanza", "David R Greenland", "9781593935412", 170, 2015);
+        Podcast urheilucast = new Podcast("Urheilucast", "Esko Seppänen", "https://soundcloud.com/urheilucast", "---");
         dao.addBook(bonanza);
+        dao.addPodcast(urheilucast);
     }
 
     @After
@@ -249,7 +251,7 @@ public class Stepdefs {
     }
 
     @When("valid link name {string}, publisher {string}, url {string} and rrs {string} are entered twice and input is confirmed")
-public void validLinkNamePublisherUrlAndRrsAreEnteredTwiceAndInputIsConfirmed(String name, String publisher, String url, String rrs) {
+    public void validLinkNamePublisherUrlAndRrsAreEnteredTwiceAndInputIsConfirmed(String name, String publisher, String url, String rrs) {
         input.add(name);
         input.add(publisher);
         input.add(url);
@@ -268,6 +270,36 @@ public void validLinkNamePublisherUrlAndRrsAreEnteredTwiceAndInputIsConfirmed(St
     @Then("cannot add another podcast with same name")
     public void cannotAddAnotherPodcastWithSameName() {
         assertTrue(io.getOutput().contains("Podcastin lisääminen ei onnistunut."));
+    }
+
+    @Given("command search podcast is selected")
+    public void commandSearchPodcastSelected() {
+        input.add("4");
+        input.add("3");
+    }
+
+    @When("existing podcast {string} is selected")
+    public void existingPodcastIsSelected(String name) {
+        input.add(name);
+        input.add("q");
+        runUi();
+    }
+
+    @Then("podcast is found")
+    public void podcastIsFound() {
+        assertFalse(io.getOutput().contains("Ei tuloksia."));
+    }
+
+    @When("nonexisting podcast {string} is selected")
+    public void nonexistingPodcastIsSelected(String name) {
+        input.add(name);
+        input.add("q");
+        runUi();
+    }
+
+    @Then("podcast is not found")
+    public void podcastIsNotFound() {
+        assertTrue(io.getOutput().contains("Ei tuloksia."));
     }
 
     private void runUi() {

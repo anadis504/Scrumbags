@@ -51,3 +51,13 @@ Feature: User can search a book with different parameters
 	And   command search book by name is selected
         When  an invalid name "Wrong Name" is entered
         Then  search has no results
+
+    Scenario: user can find existing podcast by name
+        Given command search podcast is selected
+        When  existing podcast "Urheilucast" is selected
+        Then  podcast is found
+
+    Scenario: user can't find non-existing podcast by name
+        Given command search podcast is selected
+        When  nonexisting podcast "Maukkauden makeasampo" is selected
+        Then  podcast is not found
