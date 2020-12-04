@@ -315,7 +315,7 @@ public class Ui {
             } else if (komento.equals("n") || komento.equals("e")) {
                 return false;
             }
-            io.print("Onko OK? Syötä k (kyllä, kirja lisätään) tai e (ei, lisäys peruutetaan).");
+            io.print("Onko OK? Syötä \"k\" (kyllä) tai \"e\" (ei).");
         }
     }
 }
