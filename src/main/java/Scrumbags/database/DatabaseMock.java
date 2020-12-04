@@ -143,4 +143,14 @@ public class DatabaseMock implements Dao {
     public ArrayList<Link> getAllLinks() {
         return this.links;
     }
+
+    @Override
+    public ArrayList<Book> getAllBooks() {
+        return this.books;
+    }
+
+    @Override
+    public ArrayList<Podcast> getAllPodcasts() {
+        return this.podcasts;
+    }
 }

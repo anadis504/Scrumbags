@@ -15,9 +15,11 @@ public interface Dao {
     ArrayList<Book> getBooksByAuthor(String author);
     Book getBookByIsbn(String isbn);
     ArrayList<Book> getBooksByYear(int year);
+    ArrayList<Book> getAllBooks();
     
     ArrayList<Link> getLinksByName(String name);
     ArrayList<Link> getAllLinks();
     
     ArrayList<Podcast> getPodcastsByName(String name);
+    ArrayList<Podcast> getAllPodcasts();
 }

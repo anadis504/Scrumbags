@@ -79,7 +79,7 @@ public class Database implements Dao {
 
         return true;
     }
-    
+
     @Override
     public boolean addPodcast(Podcast podcast) {
         String name = podcast.getName();
@@ -125,7 +125,7 @@ public class Database implements Dao {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Books WHERE isbn=? AND name=?");
             stmt.setString(1, isbn);
             stmt.setString(2, name);
-            
+
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException ex) {
@@ -134,13 +134,13 @@ public class Database implements Dao {
         }
         return true;
     }
-    
+
     @Override
     public boolean removeLink(String url) {
         try (Connection conn = this.ldb.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Links WHERE address=?");
             stmt.setString(1, url);
-            
+
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException ex) {
@@ -195,7 +195,7 @@ public class Database implements Dao {
             return null;
         }
     }
-    
+
     @Override
     public ArrayList<Link> getAllLinks() {
         ArrayList<Link> linklist = new ArrayList<>();
@@ -280,13 +280,55 @@ public class Database implements Dao {
             return null;
         }
     }
-    
+
+    @Override
+    public ArrayList<Book> getAllBooks() {
+        ArrayList<Book> booklist = new ArrayList<>();
+
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Books");
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()) {
+                Book book = new Book(res.getString("name"), res.getString("author"), res.getString("isbn"), res.getInt("pages"), res.getInt("year"));
+                booklist.add(book);
+            }
+            stmt.close();
+            if (booklist.isEmpty()) {
+                return null;
+            }
+            return booklist;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
     @Override
     public ArrayList<Podcast> getPodcastsByName(String name) {
         ArrayList<Podcast> podcastlist = new ArrayList<>();
         try (Connection conn = this.ldb.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Podcasts WHERE name=?");
             stmt.setString(1, name);
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                Podcast podcast = new Podcast(res.getString("name"), res.getString("publisher"), res.getString("url"), res.getString("rrs"));
+                podcastlist.add(podcast);
+            }
+            stmt.close();
+            if (podcastlist.isEmpty()) {
+                return null;
+            }
+            return podcastlist;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    @Override
+    public ArrayList<Podcast> getAllPodcasts() {
+        ArrayList<Podcast> podcastlist = new ArrayList<>();
+        try (Connection conn = this.ldb.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Podcasts");
             ResultSet res = stmt.executeQuery();
             while (res.next()) {
                 Podcast podcast = new Podcast(res.getString("name"), res.getString("publisher"), res.getString("url"), res.getString("rrs"));
