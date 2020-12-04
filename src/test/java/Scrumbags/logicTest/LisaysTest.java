@@ -21,7 +21,7 @@ public class LisaysTest {
     
     @Test
     public void addingBookReturnsTrue() {
-        assertTrue(this.service.addBook("Aapinen", "Tuntematon"));
+        assertTrue(this.service.addBook("Aapinen", "Tuntematon", "---", -1, -1));
     }
     
     @Test
@@ -31,7 +31,7 @@ public class LisaysTest {
     
     @Test
     public void addedBookExistsWithRightName() {
-        this.service.addBook("Aapinen2", "Tuntematon2");
+        this.service.addBook("Aapinen2", "Tuntematon2", "---", -1, -1);
         ArrayList<Book> booklist = this.service.getBooksByAuthor("Tuntematon2");
         boolean found = false;
         for (Book b: booklist) {

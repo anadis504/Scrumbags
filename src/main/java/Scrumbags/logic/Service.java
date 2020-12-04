@@ -12,21 +12,6 @@ public class Service {
         this.database = database;
     }
 
-    // Lisättäessä nimellä ja kirjailijalla, tarkistaa onko samannimistä kirjaa olemassa jolla on isbn.
-    // Ei hyväksytä duplaria jos saman niminen isbn:llä varustettu löytyy
-    // Tämä lisäystominto ei ole vielä käyttöliittymän käytössä
-    public boolean addBook(String name, String author) {
-        Book book = new Book(name, author);
-        if (bookNameExists(name)) {
-            for (Book b : getBooksByName(name)) {
-                if (!b.getIsbn().equals("---") || b.getIsbn().equals("")) {
-                    return false;
-                }
-            }
-        }
-        return this.database.addBook(book);
-    }
-
     public boolean addBook(String name, String author, String isbn, int pages, int year) {
         Book book = new Book(name, author, isbn, pages, year);
         if (bookIsbnExists(isbn)) {

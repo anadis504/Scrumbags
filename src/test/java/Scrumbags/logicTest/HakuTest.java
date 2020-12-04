@@ -30,9 +30,9 @@ public class HakuTest {
 
     @Test
     public void bookAmountIsRight() {
-        this.service.addBook("Aapinen", "Nobody");
-        this.service.addBook("Bk", "Nobody");
-        this.service.addBook("MAGA", "Nobody");
+        this.service.addBook("Aapinen", "Nobody", "---", -1, -1);
+        this.service.addBook("Bk", "Nobody", "---", -1, -1);
+        this.service.addBook("MAGA", "Nobody", "---", -1, -1);
         assertEquals(3, this.service.getBooksByAuthor("Nobody").size());
     }
     
@@ -95,7 +95,7 @@ public class HakuTest {
     
     @Test
     public void bookmarkAmountIsRight() {
-        this.service.addBook("Aapinen", "Tuntematon");
+        this.service.addBook("ABC", "Taavi", "123-14", 50, 2005);
         this.service.addLink("Google", "http://www.google.com");
         this.service.addLink("Omasivu", "http://www.urpo.fi");
         int linksCount = this.service.getAllLinks().size();

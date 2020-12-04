@@ -103,7 +103,6 @@ public class Stepdefs {
     @When("an invalid isbn {string} is entered")
     public void inValidIsbnIsEntered(String isbn) {
         input.add(isbn);
-
         runUi();
     }
 
@@ -344,6 +343,29 @@ public class Stepdefs {
     public void commandListBooksIsSelected() {
         input.add("1");
         runUi();
+    }
+    
+    @When("list all is selected")
+    public void commandListAllIsSelected() {
+        input.add("4");
+        runUi();
+    }
+    
+    @When("wrong parameter {string} is entered")
+    public void wrongParameterIsEntered(String string) {
+        input.add("string");
+        runUi();
+    }
+    
+    @Then("commandlist is shown again")
+    public void commandListIsShown() {
+        boolean found = false;
+        for (String line : io.getOutput()) {
+            if (line.contains("komennot:")) {
+                found = true;
+            }
+        }
+        assertTrue(found);
     }
 
     private void runUi() {

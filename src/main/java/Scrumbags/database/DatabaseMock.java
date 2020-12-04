@@ -98,6 +98,9 @@ public class DatabaseMock implements Dao {
     @Override
     public Book getBookByIsbn(String isbn) {
         for (Book b: this.books) {
+            if(b.getIsbn().equals("---") || b.getIsbn().equals("")) {
+                continue;
+            }
             if (b.getIsbn().equals(isbn)) {
                 return b;
             }
