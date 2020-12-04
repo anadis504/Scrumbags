@@ -52,3 +52,8 @@ Feature: User can search a book with different parameters
         When  an invalid name "Wrong Name" is entered
         Then  search has no results
 
+    Scenario: user can see all books as list
+        Given command list is selected
+        When  list books is selected
+        Then  bookmark details "Bonanza" are shown in terminal
+        And   bookmark details "Lofoten Rock" are shown in terminal

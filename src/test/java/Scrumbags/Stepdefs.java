@@ -38,11 +38,13 @@ public class Stepdefs {
         input = new ArrayList<>();
         service = new Service(dao);
         Book bonanza = new Book("Bonanza", "David R Greenland", "9781593935412", 170, 2015);
+        Book lofoten = new Book("Lofoten Rock", "Chris Craggs, Thorbjørn Enevold","9781873341667", 319, 2008);
         Podcast urheilucast = new Podcast("Urheilucast", "Esko Seppänen", "https://soundcloud.com/urheilucast", "---");
         Podcast kokkicast = new Podcast("Kokkicast", "---", "https://soundcloud.com/kokkicast", "---");
         Link google = new Link("Google", "http://www.google.com");
         Link yle = new Link("YLE", "http://www.yle.fi");
         dao.addBook(bonanza);
+        dao.addBook(lofoten);
         dao.addPodcast(urheilucast);
         dao.addPodcast(kokkicast);
         dao.addLink(google);
@@ -335,6 +337,12 @@ public class Stepdefs {
     @When("list podcasts is selected")
     public void commandListPodcastsIsSelected() {
         input.add("3");
+        runUi();
+    }
+    
+    @When("list books is selected")
+    public void commandListBooksIsSelected() {
+        input.add("1");
         runUi();
     }
 
