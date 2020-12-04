@@ -100,6 +100,19 @@ public class Service {
         return this.database.removeLink(url);
     }
 
+    public boolean removePodcast(ArrayList<Podcast> podlist, String id) {
+        String name = "";
+        int i = 1;
+        for (Podcast p: podlist) {
+            if (i == Integer.parseInt(id)) {
+                name = p.getName();
+            }
+            i++;
+        }
+        System.out.println("name: " + name);
+        return this.database.removePodcast(name);
+    }
+    
     public ArrayList<Book> getBooksByAuthor(String author) {
         return this.database.getBooksByAuthor(author);
     }

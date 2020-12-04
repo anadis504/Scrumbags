@@ -76,7 +76,6 @@ public class Podcast {
     
     @Override
     public String toString(){
-        String text = "";
         return "\nNimi: " + this.name 
                 + "\nJulkaisija: " + this.publisher
                 + "\n url: " + this.url
