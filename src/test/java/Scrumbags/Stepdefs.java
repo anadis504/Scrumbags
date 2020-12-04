@@ -39,8 +39,14 @@ public class Stepdefs {
         service = new Service(dao);
         Book bonanza = new Book("Bonanza", "David R Greenland", "9781593935412", 170, 2015);
         Podcast urheilucast = new Podcast("Urheilucast", "Esko Seppänen", "https://soundcloud.com/urheilucast", "---");
+        Podcast kokkicast = new Podcast("Kokkicast", "---", "https://soundcloud.com/kokkicast", "---");
+        Link google = new Link("Google", "http://www.google.com");
+        Link yle = new Link("YLE", "http://www.yle.fi");
         dao.addBook(bonanza);
         dao.addPodcast(urheilucast);
+        dao.addPodcast(kokkicast);
+        dao.addLink(google);
+        dao.addLink(yle);
     }
 
     @After
@@ -57,6 +63,12 @@ public class Stepdefs {
     public void commandSearchIsSelected() {
         input.add("4");
     }
+    
+    @Given("command list is selected")
+    public void commandListIsSelected() {
+        input.add("5");
+    }
+   
 
     @Given("command search book by isbn is selected")
     public void commandSearchBookByIsbnIsSelected() {
@@ -75,8 +87,6 @@ public class Stepdefs {
         runUi();
     }
 
-    // Tämän testin voisi muotoilla paremmin .feature -tiedostoon että missä
-    // muodossa kirjan tietojen tuloste tarkistetaan
     @Then("bookmark details {string} are shown in terminal")
     public void bookmarkDetailsAreShown(String string) {
         boolean found = false;
@@ -296,10 +306,36 @@ public class Stepdefs {
         input.add("q");
         runUi();
     }
-
-    @Then("podcast is not found")
-    public void podcastIsNotFound() {
-        assertTrue(io.getOutput().contains("Ei tuloksia."));
+    
+    @Given("command search link is selected")
+    public void searchLinkIsSelected() {
+        input.add("2");
+    }
+    
+    @When("existing link {string} is entered")
+    public void existingLinkIsEntered(String name) {
+        input.add(name);
+        input.add("q");
+        runUi();
+    }
+    
+    @When("nonexisting link {string} is entered")
+    public void nonexistingLinkIsEntered(String name) {
+        input.add(name);
+        input.add("q");
+        runUi();
+    }
+    
+    @When("list links is selected")
+    public void commandListLinksIsSelected() {
+        input.add("2");
+        runUi();
+    }
+    
+    @When("list podcasts is selected")
+    public void commandListPodcastsIsSelected() {
+        input.add("3");
+        runUi();
     }
 
     private void runUi() {
