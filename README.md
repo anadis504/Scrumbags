@@ -9,6 +9,7 @@ Lukuvinkkikirjasto<br>
 
 ![Java CI with Gradle](https://github.com/Latelaukki/Scrumbags/workflows/Java%20CI%20with%20Gradle/badge.svg)
 
+
 ## Käyttöohjeet
 
 Käy lataamassa uusin [release](https://github.com/Latelaukki/Scrumbags/releases/tag/sprint2) ja käynnistä se komentoriviltä
